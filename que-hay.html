@@ -1,0 +1,1787 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FAF4F1">
+<meta name="description" content="Encuentra recetas sencillas con lo que tienes en casa. Inspírate para el desayuno, almuerzo, merienda y cena, planifica la semana y organiza tus compras.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_UY">
+<meta property="og:title" content="¿Qué Hay? | Recetas con lo que tienes en casa">
+<meta property="og:description" content="Encuentra recetas sencillas con tus ingredientes, planifica la semana y organiza tus compras.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="¿Qué Hay? | Recetas con lo que tienes en casa">
+<meta name="twitter:description" content="Encuentra recetas sencillas con tus ingredientes, planifica la semana y organiza tus compras.">
+<title>¿Qué Hay? | Recetas con lo que tienes en casa</title>
+<style>
+:root{color-scheme:light;--cream:#FAF4F1;--tomato:#784352;--olive:#64745F;--ink:#3E3034;--muted:#766A6C;--line:#E7DAD7;--mint:#D8E1D1}
+*{box-sizing:border-box}
+body{margin:0;background:#F3EBE8;color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,select{font:inherit}button{cursor:pointer}
+.shell{width:min(100% - 28px,760px);margin:24px auto 48px}
+.app{background:var(--cream);border-radius:28px;padding:clamp(18px,4vw,34px);box-shadow:0 12px 36px #493b2312}
+.top{display:flex;align-items:center;justify-content:space-between}
+.brand{font-size:1.35rem;font-weight:750;letter-spacing:-.04em}.brand b{color:var(--tomato)}
+.date{color:var(--muted);font-size:.9rem}.hero{margin:30px 0 22px}
+.eyebrow{margin:0 0 5px;color:var(--muted);font-size:.84rem;font-weight:650;text-transform:uppercase;letter-spacing:.07em}
+h1{margin:0;font-size:clamp(1.65rem,5vw,2.25rem);line-height:1.12;letter-spacing:-.04em}
+.intro{margin:9px 0 0;color:var(--muted)}
+.section-title{font-size:1rem;font-weight:700;margin:23px 0 10px}
+.meals{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.meal{min-height:82px;border:1px solid var(--line);border-radius:16px;background:#fff;padding:11px 8px;color:var(--ink);text-align:left;transition:.15s}
+.meal:hover{border-color:var(--tomato)}
+.meal[aria-pressed=true]{background:#F2DFE1;border:2px solid var(--tomato);padding:10px 7px}
+.meal .emoji{display:block;font-size:1.2rem;margin-bottom:2px}
+.meal small{display:block;color:var(--muted);font-size:.76rem}
+.field-row{display:flex;gap:9px}
+.field-row input{min-width:0;flex:1;border:1px solid var(--line);border-radius:13px;padding:12px 14px;background:#fff;color:var(--ink)}
+input:focus-visible,button:focus-visible,select:focus-visible{outline:3px solid #78435266;outline-offset:2px}
+.secondary{border:0;border-radius:13px;padding:11px 16px;font-weight:650;background:var(--olive);color:white}
+.hint{font-size:.85rem;color:var(--muted);margin:7px 0 0}
+.preferences{margin-top:18px;padding:14px;border:1px solid var(--line);border-radius:16px;background:#fff}
+.preferences h2{font-size:1rem;margin:0 0 5px}
+.preferences p{font-size:.82rem;color:var(--muted);margin:0 0 10px}
+.preference-options{display:flex;flex-wrap:wrap;gap:8px}
+.preference-options label{display:flex;align-items:center;gap:6px;padding:7px 10px;border-radius:999px;background:var(--cream);font-size:.85rem}
+.preference-options input{accent-color:var(--tomato)}
+.servings-control{display:flex;align-items:center;gap:8px;margin-top:14px;font-weight:650}
+.servings-control select{border:1px solid var(--line);border-radius:10px;padding:7px 10px;background:#fff;color:var(--ink)}
+.time-filter{display:flex;align-items:center;gap:8px;margin:0 0 12px;font-size:.9rem;font-weight:650}
+.time-filter select{border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:#fff;color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:6px 10px;border-radius:999px;background:var(--mint);font-size:.9rem}
+.chip button{border:0;background:transparent;color:#55594c;font-size:1.1rem;line-height:1;padding:0 1px}
+.empty{font-size:.9rem;color:var(--muted);margin:11px 0}
+.result-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:26px 0 10px}
+.result-head .section-title{margin:0}.result-head small{color:var(--muted);text-align:right}
+.recipe{background:#fff;border:1px solid #eee5d5;border-radius:20px;padding:clamp(16px,3.5vw,23px)}
+.recipe-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.recipe h2{font-size:1.3rem;line-height:1.25;margin:0 0 5px;letter-spacing:-.025em}
+.recipe p{color:var(--muted);margin:0}
+.match{background:var(--mint);border-radius:999px;padding:5px 9px;white-space:nowrap;font-size:.78rem;color:var(--ink)}
+.no-sugar{display:inline-block;margin-top:8px;padding:4px 8px;border-radius:999px;background:var(--mint);font-size:.78rem;font-weight:650}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin:15px 0}
+.fact{background:#F5ECEA;border-radius:10px;padding:6px 9px;font-size:.85rem}
+.method-tag{display:inline-flex;align-items:center;gap:5px;background:#D8E1D1;border-radius:999px;padding:6px 10px;font-size:.82rem;font-weight:650}
+.availability{margin-top:15px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.availability section{padding:12px;border-radius:13px;background:var(--cream)}
+.availability section:last-child{background:#F2DFE1}
+.availability h3,.recipe-details h3{font-size:.9rem;margin:0 0 7px}
+.availability p{font-size:.87rem;color:var(--muted)}
+.availability ul{padding-left:18px;margin:0;font-size:.87rem}
+.availability li+li{margin-top:3px}
+.addon-list{list-style:none;padding:0;margin:0}
+.addon-list li{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.87rem}
+.addon-list li+li{margin-top:7px}
+.reject-button{border:1px solid var(--line);border-radius:8px;padding:4px 8px;background:#fff;color:var(--muted);font-size:.76rem}
+.reject-button:hover{border-color:var(--tomato);color:var(--tomato)}
+.recipe-details{margin-top:15px;padding:13px;border-radius:13px;background:var(--cream)}
+.recipe-details ul,.recipe-details ol{margin:0;padding-left:20px;font-size:.87rem}
+.recipe-details li+li{margin-top:3px}
+.note{font-size:.78rem;color:var(--muted);margin:13px 0 0}
+.footer{font-size:.82rem;color:var(--muted);text-align:center;margin:18px 0 0}
+.toast{margin-top:10px;color:#3c6841;font-size:.88rem;min-height:1.3em}
+.app-nav{display:flex;gap:8px;margin:20px 0 4px;padding:5px;background:#F0E7E5;border-radius:14px}
+.nav-button{flex:1;border:0;border-radius:10px;padding:10px 12px;background:transparent;color:var(--muted);font-weight:650}
+.nav-button.active{background:#fff;color:var(--ink);box-shadow:0 2px 8px #493b2312}
+.saved-list{display:grid;gap:10px;margin-top:14px}
+.saved-item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px;border:1px solid var(--line);border-radius:14px;background:#fff}
+.saved-item p{margin:3px 0 0;color:var(--muted);font-size:.88rem}
+.saved-actions,.recipe-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+.saved-actions button,.recipe-actions button,.remove-button{border:1px solid var(--line);border-radius:10px;padding:8px 11px;background:#fff;color:var(--ink);font-weight:600}
+.recipe-actions button:last-child{background:var(--mint)}
+.shopping-list{display:grid;gap:8px;padding:0;list-style:none;margin:16px 0}
+.shopping-item{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:12px;background:#fff}
+.shopping-item label{flex:1;display:flex;align-items:center;gap:10px}
+.shopping-item input:checked+span{text-decoration:line-through;color:var(--muted)}
+.plan-days{display:grid;gap:12px;margin-top:16px}
+.plan-day{padding:14px;border:1px solid var(--line);border-radius:15px;background:#fff}
+.plan-day.completed{border-color:#A9B99E;background:#F5F8F2}
+.plan-day h2{font-size:1rem;margin:0 0 10px;text-transform:capitalize}
+.plan-done-button{margin:0 0 11px;border:1px solid #A9B99E;border-radius:9px;padding:7px 10px;background:#fff;color:var(--olive);font-size:.82rem;font-weight:700}
+.plan-day.completed .plan-done-button{background:var(--olive);color:#fff}
+.plan-empty{margin:0 0 11px;color:var(--muted);font-size:.8rem}
+.plan-missing{margin:0 0 12px;padding:8px 10px;border-radius:10px;background:#F5ECEA;color:var(--muted);font-size:.82rem}
+.plan-missing.complete{background:#F5F8F2;color:var(--olive)}
+.plan-slots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.plan-slot{display:grid;gap:4px;font-size:.8rem;color:var(--muted);font-weight:650}
+.plan-slot select{width:100%;min-width:0;border:1px solid var(--line);border-radius:9px;padding:8px;background:#fff;color:var(--ink);font-size:.85rem}
+.plan-slot-wrap{min-width:0}
+.plan-move{margin-top:5px;padding:5px 7px;border-radius:9px;background:#F5F8F2}
+.plan-move summary{cursor:pointer;color:var(--olive);font-size:.78rem;font-weight:650}
+.plan-move-controls{display:flex;gap:6px;align-items:end;margin-top:7px}
+.plan-move-controls label{display:grid;flex:1;gap:3px;color:var(--muted);font-size:.72rem}
+.plan-move-controls select{width:100%;min-width:0;border:1px solid var(--line);border-radius:7px;padding:6px;background:#fff;color:var(--ink);font-size:.78rem}
+.plan-move-controls button{border:0;border-radius:7px;padding:7px 9px;background:var(--olive);color:#fff;font-size:.78rem;font-weight:650}
+.plan-move-feedback{display:block;min-height:1em;margin-top:4px;color:var(--tomato);font-size:.73rem}
+.plan-actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:16px}
+.plan-count{font-size:.87rem;color:var(--muted)}
+[data-view="plan"]{white-space:nowrap}
+.plan-from-recipe{margin-top:10px;padding:10px 12px;border-radius:12px;background:#F5F8F2}
+.plan-from-recipe summary{cursor:pointer;font-size:.9rem;font-weight:700;color:var(--olive)}
+.plan-from-recipe-controls{display:flex;align-items:end;gap:8px;margin-top:9px}
+.plan-from-recipe-controls label{display:grid;flex:1;gap:4px;font-size:.78rem;color:var(--muted)}
+.plan-from-recipe-controls select{width:100%;min-width:0;border:1px solid var(--line);border-radius:9px;padding:8px;background:#fff;color:var(--ink)}
+.plan-from-recipe-controls button{border:0;border-radius:9px;padding:9px 11px;background:var(--olive);color:#fff;font-weight:650}
+.plan-feedback{display:block;min-height:1.2em;margin-top:6px;font-size:.82rem;color:var(--tomato)}
+[hidden]{display:none!important}
+.cooking-card{margin-top:14px;padding:16px;border:1px solid #E7DAD7;border-radius:16px;background:#FAF4F1}.cooking-header{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.cooking-count{font-size:.84rem;font-weight:700;color:var(--tomato)}.cooking-close{border:0;background:transparent;color:var(--muted);padding:5px 8px}.cooking-progress{height:8px;margin:0 0 14px;border-radius:99px;background:#E7DAD7;overflow:hidden}.cooking-progress span{display:block;height:100%;border-radius:inherit;background:var(--olive);transition:width .2s}.cooking-step{min-height:88px;display:flex;align-items:center;margin:0;padding:16px;border-radius:13px;background:#fff;font-size:1.08rem;line-height:1.5}.cooking-controls{display:flex;justify-content:space-between;gap:10px;margin-top:14px}.cooking-controls button{border:1px solid var(--line);border-radius:10px;padding:9px 13px;background:#fff;color:var(--ink);font-weight:650}.cooking-controls button:last-child{background:var(--tomato);color:#fff;border-color:var(--tomato)}.cooking-controls button:disabled{opacity:.45;cursor:not-allowed}
+.substitution-card{margin-top:12px;padding:12px;border:1px solid #D8E1D1;border-radius:13px;background:#F5F8F2}
+.substitution-card h3{font-size:.88rem;margin:0 0 5px}
+.substitution-card ul{margin:0;padding-left:19px;font-size:.87rem}
+.drink-pairing{margin-top:14px;padding:14px;border:1px solid #D8E1D1;border-radius:14px;background:#F5F8F2}
+.drink-pairing h3{font-size:.9rem;margin:0 0 9px}
+.drink-pairing-controls{display:flex;gap:8px;flex-wrap:wrap}
+.drink-pairing select{min-width:0;flex:1;border:1px solid var(--line);border-radius:10px;padding:9px;background:#fff;color:var(--ink)}
+.drink-pairing button{border:1px solid var(--line);border-radius:10px;padding:8px 11px;background:#fff;color:var(--ink);font-weight:650}
+.drink-pairing p{margin:10px 0 0;font-size:.88rem}
+@media(max-width:520px){
+ .shell{width:min(100% - 18px,760px);margin:10px auto 28px}
+ .app{border-radius:22px;padding:18px 14px}
+ .meals{grid-template-columns:repeat(2,1fr)}.meal{min-height:68px}
+ .field-row{flex-wrap:wrap}.field-row input{flex-basis:100%}.field-row button{flex:1}
+ .availability{grid-template-columns:1fr}
+ .result-head{align-items:flex-start;flex-direction:column}
+ .result-head small{text-align:left}
+}
+</style>
+</head>
+<body>
+<main class="shell">
+<div class="app">
+<header class="top">
+  <div class="brand"><b>🍓</b> ¿Qué Hay?</div>
+  <div class="date" id="today"></div>
+</header>
+
+<nav class="app-nav" aria-label="Secciones de la app">
+  <button class="nav-button active" type="button" data-view="today">Hoy</button>
+  <button class="nav-button" type="button" data-view="plan">Plan</button>
+  <button class="nav-button" type="button" data-view="favorites">Favoritos</button>
+  <button class="nav-button" type="button" data-view="shopping">Compras</button>
+</nav>
+
+<section class="hero" data-view-content="today">
+  <p class="eyebrow">Ideas para comer rico y mejor</p>
+  <h1>¿Qué tienes a mano?</h1>
+  <p class="intro">Cuéntame qué hay en tu cocina y buscamos una idea para tu próxima comida.</p>
+  <label class="servings-control">
+    Porciones
+    <select id="servings-select">
+      <option value="1">1</option><option value="2">2</option>
+      <option value="3">3</option><option value="4">4</option>
+      <option value="5">5</option><option value="6">6</option>
+    </select>
+  </label>
+</section>
+
+<section data-view-content="today" aria-labelledby="meal-title">
+  <h2 class="section-title" id="meal-title">¿Qué comida estás pensando?</h2>
+  <div class="meals" id="meals"></div>
+</section>
+
+<section data-view-content="today" aria-labelledby="pantry-title">
+  <h2 class="section-title" id="pantry-title">Lo que tienes</h2>
+  <form class="field-row" id="ingredient-form">
+    <input id="ingredient-input" autocomplete="off" placeholder="Ej. huevos, lentejas, yogur…" aria-label="Ingrediente para agregar">
+    <button class="secondary" type="submit">Agregar</button>
+  </form>
+  <p class="hint">Puedes agregar varios separados por comas. Se guardan en este dispositivo.</p>
+  <div class="chips" id="chips" aria-live="polite"></div>
+  <div class="toast" id="toast" aria-live="polite"></div>
+</section>
+
+<section class="preferences" data-view-content="today" aria-labelledby="preferences-title">
+  <h2 id="preferences-title">Preferencias</h2>
+  <p>Filtra recetas por sus ingredientes. Si tienes alergias, revisa también etiquetas y posibles contaminaciones cruzadas.</p>
+  <div class="preference-options">
+    <label><input type="checkbox" data-diet="vegetarian"> Vegetariana</label>
+    <label><input type="checkbox" data-allergen="peanuts"> Sin maní ni frutos secos</label>
+    <label><input type="checkbox" data-allergen="dairy"> Sin lácteos</label>
+    <label><input type="checkbox" data-allergen="eggs"> Sin huevo</label>
+    <label><input type="checkbox" data-allergen="fish"> Sin pescado</label>
+    <label><input type="checkbox" data-allergen="gluten"> Sin gluten</label>
+    <label><input type="checkbox" data-allergen="soy"> Sin soja</label>
+  </div>
+</section>
+
+<section data-view-content="today" aria-labelledby="idea-title">
+  <div class="result-head">
+    <h2 class="section-title" id="idea-title">Ideas para ti</h2>
+    <small id="result-summary"></small>
+  </div>
+  <div class="field-row" style="margin-bottom:12px">
+    <input id="recipe-search" type="search" autocomplete="off"
+      placeholder="Buscar receta o ingrediente…"
+      aria-label="Buscar recetas por nombre o ingrediente">
+  </div>
+  <label class="time-filter" for="time-filter">⏱ Tiempo máximo
+    <select id="time-filter">
+      <option value="0">Cualquier tiempo</option>
+      <option value="15">Hasta 15 minutos</option>
+      <option value="30">Hasta 30 minutos</option>
+      <option value="45">Hasta 45 minutos</option>
+    </select>
+  </label>
+  <div id="result"></div>
+</section>
+
+<section data-view-content="favorites" hidden aria-labelledby="favorites-title">
+  <h1 id="favorites-title">Tus favoritos</h1>
+  <p class="intro">Guarda las ideas que quieras volver a preparar.</p>
+  <div class="saved-list" id="favorite-list"></div>
+</section>
+
+<section data-view-content="shopping" hidden aria-labelledby="shopping-title">
+  <h1 id="shopping-title">Lista de compras</h1>
+  <p class="intro">Aquí quedan los ingredientes que agregues desde una receta o escribas tú.</p>
+  <form class="field-row" id="shopping-form" style="margin-top:16px">
+    <input id="shopping-input" autocomplete="off" placeholder="Ej. yogur natural, zanahorias…" aria-label="Agregar a la lista de compras">
+    <button class="secondary" type="submit">Agregar</button>
+  </form>
+  <ul class="shopping-list" id="shopping-list"></ul>
+</section>
+
+<section data-view-content="plan" hidden aria-labelledby="plan-title">
+  <h1 id="plan-title">Plan semanal</h1>
+  <p class="intro">Elige una receta para cada comida. El plan se guarda en este dispositivo.</p>
+  <div class="plan-actions">
+    <button class="secondary" id="plan-shopping" type="button">Agregar faltantes del plan a Compras</button>
+    <span class="plan-count" id="plan-count" aria-live="polite"></span>
+  </div>
+  <div class="plan-days" id="plan-days"></div>
+</section>
+
+<p class="footer">Las cantidades de proteína e ingredientes son aproximadas. Las opciones “sin azúcar añadida” igual contienen azúcares naturales de frutas o lácteos.</p>
+</div>
+</main>
+
+<script>
+const meals=[
+  ['desayuno','☀️','Desayuno','Para empezar'],
+  ['almuerzo','🍽️','Almuerzo','Plato principal'],
+  ['merienda','🍎','Merienda','Algo entre horas'],
+  ['cena','🌙','Cena','Para cerrar']
+];
+
+const ingredientAliases={
+  huevos:['huevo','huevos'],huevo:['huevo','huevos'],
+  pan:['pan','tostada','tostadas'],'pan integral':['pan integral','integral'],
+  tomate:['tomate','jitomate'],espinaca:['espinaca','espinacas'],
+  acelga:['acelga','acelgas'],coliflor:['coliflor','coliflores'],arroz:['arroz'],
+  pollo:['pollo','pechuga'],verduras:['verdura','verduras','vegetales'],
+  avena:['avena','avena arrollada'],yogur:['yogur','yogurt'],
+  banana:['banana','bananas','platano','plátano'],mango:['mango','mangos'],
+  kiwi:['kiwi','kiwis'],uvas:['uva','uvas'],durazno:['durazno','duraznos','melocoton','melocotón'],
+  arandanos:['arandano','arándano','arandanos','arándanos','blueberry','blueberries'],
+  anana:['anana','ananá','piña','pina'],melon:['melon','melón'],sandia:['sandia','sandía'],
+  ciruela:['ciruela','ciruelas'],cerezas:['cereza','cerezas'],
+  mandarina:['mandarina','mandarinas'],pomelo:['pomelo','pomelos','toronja','toronjas'],
+  lima:['lima','limas'],cafe:['cafe','café','cafe molido','café molido','cafe instantaneo','café instantáneo'],
+  te:['te','té','saquito de te','saquito de té','te negro','té negro','te verde','té verde','bolsita de te'],
+  'yerba mate':['yerba mate','yerba','yerba para mate','mate'],queso:['queso'],
+  lentejas:['lenteja','lentejas'],garbanzos:['garbanzo','garbanzos','hummus'],
+  zanahoria:['zanahoria','zanahorias'],papa:['papa','papas','patata','patatas'],
+  atun:['atun','atún'],carne:['carne','res','ternera'],
+  'carne vacuna':['carne vacuna','carne de vaca','carne','vaca','res','ternera','bife','churrasco','asado','vacio','vacío','nalga','cuadril','milanesa','milanesas'],
+  cerdo:['cerdo','carne de cerdo','chancho','puerco','bondiola','chuleta','costillita','costillitas','milanesa de cerdo'],
+  'pan rallado':['pan rallado','rebozador','miga de pan'],
+  pescado:['pescado','merluza'],salmon:['salmon','salmón'],leche:['leche'],
+  frutilla:['frutilla','frutillas','fresa','fresas'],manzana:['manzana','manzanas'],
+  pera:['pera','peras'],naranja:['naranja','naranjas'],palta:['palta','aguacate'],
+  mani:['mani','maní','cacahuate','crema de mani','mantequilla de mani'],
+  nueces:['nuez','nueces','almendras'],
+  semillas:['semilla','semillas','chia','chía','sesamo','sésamo'],
+  granola:['granola'],quinoa:['quinoa','quinua'],canela:['canela'],
+  porotos:['poroto','porotos','frijol','frijoles','alubia','alubias','frejoles'],
+  tofu:['tofu'],brocoli:['brocoli','brócoli'],
+  morron:['morron','morrón','pimiento','aji','ají'],cebolla:['cebolla'],
+  ajo:['ajo'],pepino:['pepino'],lechuga:['lechuga'],
+  zapallito:['zapallito','calabacin','calabacín'],calabaza:['calabaza','zapallo'],
+  choclo:['choclo','maiz','maíz','elote'],pasta:['pasta','fideos','macarrones'],
+  fideos:['fideo','fideos','pasta'],harina:['harina'],miel:['miel'],
+  limon:['limon','limón'],aceite:['aceite','aceite de oliva'],
+  aceitunas:['aceituna','aceitunas'],ricota:['ricota','requeson','requesón'],
+  batata:['batata','boniato'],arvejas:['arveja','arvejas','guisantes'],
+  champinones:['champinon','champiñon','champiñones','hongos'],
+  repollo:['repollo','col'],pavo:['pavo'],jamon:['jamon','jamón'],
+  galletas:['galleta','galletas','crackers'],cacao:['cacao','cocoa'],
+  berenjena:['berenjena','berenjenas','eggplant'],
+  remolacha:['remolacha','remolachas','betabel','beterraga'],
+  polenta:['polenta','harina de maiz','harina de maíz','polenta instantanea','polenta instantánea'],
+  'carne picada magra':['carne picada','carne molida','carne molida magra','picada vacuna','carne picada vacuna'],
+  'repollo morado':['repollo morado','repollo colorado','col morada','col lombarda'],
+  papaya:['papaya','papayas','mamon','mamón','lechosa'],
+  frambuesa:['frambuesa','frambuesas','frambuesa roja','raspberry','raspberries'],
+  puerro:['puerro','puerros','poro','porro','leek'],
+  hinojo:['hinojo','bulbo de hinojo','fenouil'],
+  mandioca:['mandioca','yuca','aipim','cassava'],
+  'cuscús':['cuscús','cuscus','couscous'],
+  tomillo:['tomillo'],jengibre:['jengibre','ginger'],
+  perejil:['perejil','perejil fresco'],oregano:['oregano','orégano'],
+  romero:['romero','romero fresco'],laurel:['laurel','hoja de laurel'],
+  menta:['menta','hierbabuena'],vinagre:['vinagre','vinagre de manzana']
+};
+
+const recipes=[
+  {meal:'desayuno',name:'Huevos revueltos con tostada y tomate',desc:'Un desayuno sencillo con proteína y algo fresco.',ingredients:['huevos','pan','tomate'],protein:20,time:12,boost:'Una fruta de estación suma fibra y variedad.',keys:{huevos:['huevo','huevos'],pan:['pan','tostada'],tomate:['tomate']}},
+  {meal:'desayuno',name:'Avena con yogur y banana',desc:'Una opción rápida, saciante y fácil de adaptar.',ingredients:['avena','yogur','banana'],protein:17,time:8,boost:'Un puñado de nueces o maní aporta grasas saludables y más proteína.',keys:{avena:['avena'],yogur:['yogur'],banana:['banana','plátano']}},
+  {meal:'desayuno',name:'Tostadas con queso y huevo',desc:'Combina una fuente de proteína con pan para arrancar.',ingredients:['pan','queso','huevos'],protein:22,time:10,boost:'Agrega fruta si tienes para completar la comida.',keys:{pan:['pan','tostada'],queso:['queso'],huevos:['huevo','huevos']}},
+  {meal:'almuerzo',name:'Tortilla de espinaca con arroz',desc:'Una comida casera con proteína y verduras.',ingredients:['huevos','espinaca','arroz'],protein:24,time:20,boost:'Tomate o alguna otra verdura fresca suma color y variedad.',keys:{huevos:['huevo','huevos'],espinaca:['espinaca'],arroz:['arroz']}},
+  {meal:'almuerzo',name:'Lentejas con huevo y tomate',desc:'Legumbres y huevo en un plato rendidor.',ingredients:['lentejas','huevos','tomate'],protein:26,time:25,boost:'Si tienes, suma una verdura más como zanahoria o morrón.',keys:{lentejas:['lenteja','lentejas'],huevos:['huevo','huevos'],tomate:['tomate']}},
+  {meal:'almuerzo',name:'Pollo con arroz y verduras',desc:'Una combinación completa y fácil de ajustar.',ingredients:['pollo','arroz','verduras'],protein:32,time:25,boost:'Un poco de limón o hierbas puede darle más sabor.',keys:{pollo:['pollo','pechuga'],arroz:['arroz'],verduras:['verdura','verduras','zanahoria','morrón','espinaca','brócoli']}},
+  {meal:'merienda',name:'Yogur con avena y banana',desc:'Una merienda práctica con proteína y energía.',ingredients:['yogur','avena','banana'],protein:17,time:5,boost:'Unas semillas o frutos secos aportan textura y grasas saludables.',keys:{yogur:['yogur','yogurt'],avena:['avena'],banana:['banana','plátano']}},
+  {meal:'merienda',name:'Tostadas con queso y tomate',desc:'Una opción salada, simple y rica.',ingredients:['pan','queso','tomate'],protein:14,time:8,boost:'Puedes sumar un huevo para aumentar la proteína.',keys:{pan:['pan','tostada','tostadas'],queso:['queso'],tomate:['tomate']}},
+  {meal:'merienda',name:'Hummus con pan y zanahoria',desc:'Garbanzos y vegetales en una merienda distinta.',ingredients:['garbanzos','pan','zanahoria'],protein:13,time:10,boost:'Si tienes yogur natural, puede acompañar y sumar proteína.',keys:{garbanzos:['garbanzo','garbanzos','hummus'],pan:['pan'],zanahoria:['zanahoria']}},
+  {meal:'cena',name:'Omelette de queso y verduras',desc:'Una cena rápida que puedes hacer con las verduras que tengas.',ingredients:['huevos','queso','verduras'],protein:25,time:15,boost:'Una ensalada sencilla puede completar el plato.',keys:{huevos:['huevo','huevos'],queso:['queso'],verduras:['verdura','verduras','tomate','espinaca','cebolla','morrón']}},
+  {meal:'cena',name:'Garbanzos salteados con verduras',desc:'Legumbres y verduras para una cena sin complicaciones.',ingredients:['garbanzos','verduras','arroz'],protein:20,time:20,boost:'Puedes añadir un huevo o un poco de queso si quieres subir la proteína.',keys:{garbanzos:['garbanzo','garbanzos'],verduras:['verdura','verduras','tomate','espinaca','cebolla','morrón'],arroz:['arroz']}},
+  {meal:'cena',name:'Atún con papa y ensalada',desc:'Una mezcla práctica de proteína, vegetales y papa.',ingredients:['atún','papa','tomate'],protein:29,time:20,boost:'Agrega hojas verdes o cualquier verdura fresca que tengas.',keys:{'atún':['atún','atun'],papa:['papa','papas','patata','patatas'],tomate:['tomate']}},
+  {meal:'desayuno',name:'Avena caliente con manzana y leche',desc:'Un desayuno tibio con fibra y proteína.',ingredients:['avena','leche','manzana'],protein:16,time:12,boost:'Canela o nueces le dan un toque extra.'},
+  {meal:'desayuno',name:'Omelette de queso y espinaca',desc:'Una opción salada rica en proteína.',ingredients:['huevos','queso','espinaca'],protein:25,time:12,boost:'Acompaña con una fruta o pan integral.'},
+  {meal:'desayuno',name:'Yogur con frutilla y granola',desc:'Fresco, simple y fácil de preparar.',ingredients:['yogur','frutilla','granola'],protein:16,time:5,boost:'Semillas o nueces aportan textura.'},
+  {meal:'desayuno',name:'Tostada de palta y huevo',desc:'Pan, huevo y palta para una combinación saciante.',ingredients:['pan','palta','huevos'],protein:19,time:12,boost:'Tomate o limón quedan muy bien.'},
+  {meal:'desayuno',name:'Panqueques de banana y avena',desc:'Una idea dulce con ingredientes sencillos.',ingredients:['banana','avena','huevos'],protein:18,time:15,boost:'Puedes servirlos con yogur.'},
+  {meal:'desayuno',name:'Tostadas con ricota y miel',desc:'Una alternativa suave con un toque dulce.',ingredients:['pan','ricota','miel'],protein:15,time:5,boost:'Agrega fruta fresca si tienes.'},
+  {meal:'desayuno',name:'Licuado de leche, banana y maní',desc:'Rápido y energético para empezar el día.',ingredients:['leche','banana','mani'],protein:18,time:5,boost:'Avena también combina bien.'},
+  {meal:'almuerzo',name:'Carne con papas y zanahoria',desc:'Un plato casero con proteína y vegetales.',ingredients:['carne','papa','zanahoria'],protein:31,time:35,boost:'Cebolla y hierbas suman sabor.'},
+  {meal:'almuerzo',name:'Pasta con atún y tomate',desc:'Una comida práctica con proteína.',ingredients:['pasta','atun','tomate'],protein:29,time:20,boost:'Agrega aceitunas o hierbas si tienes.'},
+  {meal:'almuerzo',name:'Quinoa con garbanzos y pepino',desc:'Una ensalada completa con legumbres.',ingredients:['quinoa','garbanzos','pepino'],protein:19,time:25,boost:'Limón y aceite de oliva van muy bien.'},
+  {meal:'almuerzo',name:'Arroz salteado con tofu y brócoli',desc:'Una combinación vegetal con buena proteína.',ingredients:['arroz','tofu','brocoli'],protein:23,time:25,boost:'Ajo y salsa de soja pueden darle más sabor.'},
+  {meal:'almuerzo',name:'Pasta con tomate y queso',desc:'Una receta sencilla que puedes completar con verduras.',ingredients:['pasta','tomate','queso'],protein:20,time:20,boost:'Añade espinaca o champiñones.'},
+  {meal:'almuerzo',name:'Pollo con batata y brócoli',desc:'Proteína y vegetales en un plato caliente.',ingredients:['pollo','batata','brocoli'],protein:33,time:30,boost:'Limón y aceite de oliva combinan bien.'},
+  {meal:'almuerzo',name:'Porotos con calabaza y espinaca',desc:'Legumbres y verduras en un plato rendidor.',ingredients:['porotos','calabaza','espinaca'],protein:21,time:30,boost:'Ajo y cebolla realzan el sabor.'},
+  {meal:'merienda',name:'Yogur con manzana y nueces',desc:'Una merienda rápida con proteína y fibra.',ingredients:['yogur','manzana','nueces'],protein:16,time:5,boost:'Canela queda muy bien.'},
+  {meal:'merienda',name:'Hummus con pepino y galletas',desc:'Garbanzos y vegetales para una opción salada.',ingredients:['garbanzos','pepino','galletas'],protein:12,time:8,boost:'Zanahoria también sirve para acompañar.'},
+  {meal:'merienda',name:'Tostadas de ricota con frutilla',desc:'Combina lácteo y fruta de forma sencilla.',ingredients:['pan','ricota','frutilla'],protein:17,time:7,boost:'Un toque de miel es opcional.'},
+  {meal:'merienda',name:'Tostada con palta y queso',desc:'Una opción salada y fácil de armar.',ingredients:['pan','palta','queso'],protein:16,time:7,boost:'Tomate fresco le queda bien.'},
+  {meal:'merienda',name:'Licuado de banana, leche y avena',desc:'Una merienda bebible y saciante.',ingredients:['banana','leche','avena'],protein:17,time:5,boost:'Canela o cacao sin azúcar son buenas opciones.'},
+  {meal:'merienda',name:'Manzana con crema de maní',desc:'Una combinación simple de fruta y proteína vegetal.',ingredients:['manzana','mani'],protein:8,time:3,boost:'Yogur natural puede acompañarla.'},
+  {meal:'merienda',name:'Queso con galletas y tomate',desc:'Una merienda salada en pocos minutos.',ingredients:['queso','galletas','tomate'],protein:15,time:5,boost:'Agrega hojas verdes si tienes.'},
+  {meal:'cena',name:'Pescado con papa y brócoli',desc:'Una cena con proteína y vegetales.',ingredients:['pescado','papa','brocoli'],protein:30,time:25,boost:'Limón y hierbas frescas van muy bien.'},
+  {meal:'cena',name:'Frittata de papa y cebolla',desc:'Huevo y vegetales en una cena rendidora.',ingredients:['huevos','papa','cebolla'],protein:22,time:25,boost:'Una ensalada verde puede acompañarla.'},
+  {meal:'cena',name:'Tacos de carne con morrón',desc:'Carne y vegetales para una cena sabrosa.',ingredients:['carne','morron','pan'],protein:29,time:20,boost:'Tomate y yogur natural sirven como acompañamiento.'},
+  {meal:'cena',name:'Tofu con fideos y verduras',desc:'Una cena vegetal que puedes variar según la despensa.',ingredients:['tofu','fideos','verduras'],protein:24,time:20,boost:'Ajo, jengibre o salsa de soja aportan sabor.'},
+  {meal:'cena',name:'Sopa de lentejas y zanahoria',desc:'Caliente, rendidora y con proteína vegetal.',ingredients:['lentejas','zanahoria','cebolla'],protein:20,time:30,boost:'Un huevo duro o queso puede sumar proteína.'},
+  {meal:'cena',name:'Pollo con calabaza y espinaca',desc:'Una combinación simple de proteína y verduras.',ingredients:['pollo','calabaza','espinaca'],protein:32,time:30,boost:'Ajo y limón realzan el plato.'},
+  {meal:'cena',name:'Ensalada de atún, choclo y huevo',desc:'Una cena fresca con varias fuentes de proteína.',ingredients:['atun','choclo','huevos'],protein:30,time:15,boost:'Papa o hojas verdes pueden completarla.'},
+  {meal:'desayuno',name:'Avena tibia con pera y canela',desc:'Dulce por la fruta, sin azúcar añadida.',ingredients:['avena','leche','pera'],protein:15,time:12,boost:'La canela realza el sabor sin endulzar.',noAddedSugar:true},
+  {meal:'desayuno',name:'Yogur natural con frutillas, chía y nueces',desc:'Fresco, cremoso y con dulzor natural de la fruta.',ingredients:['yogur','frutilla','semillas','nueces'],protein:19,time:5,boost:'Usa yogur natural sin azúcar agregada.',noAddedSugar:true},
+  {meal:'desayuno',name:'Pudín de chía con banana y leche',desc:'Se puede dejar listo la noche anterior y endulzar con banana.',ingredients:['semillas','banana','leche'],protein:13,time:5,boost:'Déjalo reposar varias horas para que espese.',noAddedSugar:true},
+  {meal:'desayuno',name:'Tostadas de ricota con manzana y canela',desc:'Una combinación dulce y cremosa sin azúcar añadida.',ingredients:['pan','ricota','manzana'],protein:17,time:10,boost:'Dora la manzana unos minutos con canela.',noAddedSugar:true},
+  {meal:'desayuno',name:'Tortitas de banana y avena',desc:'Dulces por la banana madura y sin azúcar agregada.',ingredients:['banana','avena','huevos'],protein:16,time:20,boost:'Acompaña con yogur natural si tienes.',noAddedSugar:true},
+  {meal:'merienda',name:'Yogur con banana y cacao',desc:'Una merienda cremosa con sabor a chocolate, sin azúcar añadida.',ingredients:['yogur','banana','cacao'],protein:16,time:5,boost:'Elige cacao puro sin azúcar.',noAddedSugar:true},
+  {meal:'merienda',name:'Manzana tibia con ricota y nueces',desc:'Fruta caliente con ricota y un toque crocante.',ingredients:['manzana','ricota','nueces'],protein:18,time:12,boost:'Calienta la manzana con canela y sírvela con ricota.',noAddedSugar:true},
+  {meal:'merienda',name:'Licuado de frutilla, banana y leche',desc:'La fruta madura aporta todo el dulzor, sin azúcar agregada.',ingredients:['frutilla','banana','leche'],protein:14,time:5,boost:'Usa banana bien madura para que quede más dulce.',noAddedSugar:true},
+  {meal:'merienda',name:'Bocaditos de avena, banana y maní',desc:'Bocaditos horneados que se endulzan con banana.',ingredients:['avena','banana','mani'],protein:13,time:15,boost:'Usa maní o crema de maní sin azúcar añadida.',noAddedSugar:true},
+  {meal:'merienda',name:'Pudín de chía con frutilla y yogur',desc:'Una merienda fresca y frutal que puedes preparar antes.',ingredients:['semillas','frutilla','yogur'],protein:17,time:5,boost:'Déjalo reposar en la heladera para que espese.',noAddedSugar:true},
+  {meal:'desayuno',name:'Tostadas de hummus y tomate',desc:'Pan tostado con hummus cremoso y tomate fresco.',ingredients:['pan','garbanzos','tomate'],protein:12,time:8,boost:'Unas gotas de limón combinan bien.',keys:{pan:['pan','tostada'],garbanzos:['hummus','garbanzo','garbanzos'],tomate:['tomate']}},
+  {meal:'merienda',name:'Yogur con pera y avena',desc:'Una merienda suave con fruta fresca y avena.',ingredients:['yogur','pera','avena'],protein:16,time:5,boost:'Canela le queda bien.'},
+  {meal:'almuerzo',name:'Hamburguesas de lentejas y avena',desc:'Medallones dorados de lentejas, avena y huevo.',ingredients:['lentejas','avena','huevos','cebolla'],protein:22,time:25,boost:'Sírvelas con tomate o lechuga.',keys:{lentejas:['lenteja','lentejas'],avena:['avena'],huevos:['huevo','huevos'],cebolla:['cebolla']}},
+  {meal:'almuerzo',name:'Arroz salteado con huevo y verduras',desc:'Arroz caliente salteado con verduras y huevo revuelto.',ingredients:['arroz','huevos','verduras'],protein:19,time:18,boost:'Ajo o salsa de soja pueden darle más sabor.',keys:{arroz:['arroz'],huevos:['huevo','huevos'],verduras:['verdura','verduras','vegetales','zanahoria','morrón','espinaca']}},
+  {meal:'almuerzo',name:'Tarta de espinaca y queso',desc:'Relleno de espinaca, huevo y queso en masa horneada.',ingredients:['masa para tarta','espinaca','huevos','queso','cebolla'],protein:21,time:40,boost:'Acompáñala con tomate o una ensalada.',keys:{'masa para tarta':['masa para tarta','masa de tarta','tapa de tarta'],espinaca:['espinaca'],huevos:['huevo','huevos'],queso:['queso'],cebolla:['cebolla']}},
+  {meal:'cena',name:'Zapallitos rellenos de arroz y queso',desc:'Zapallitos tiernos rellenos con arroz, cebolla y queso gratinado.',ingredients:['zapallito','arroz','queso','cebolla'],protein:16,time:35,boost:'Un poco de tomate picado queda bien en el relleno.',keys:{zapallito:['zapallito','calabacín','calabacin'],arroz:['arroz'],queso:['queso'],cebolla:['cebolla']}},
+  {meal:'cena',name:'Sopa de verduras y garbanzos',desc:'Caldo casero con garbanzos, zanahoria y verduras.',ingredients:['garbanzos','zanahoria','verduras','cebolla'],protein:17,time:30,boost:'Limón al servir aporta frescura.',keys:{garbanzos:['garbanzo','garbanzos'],zanahoria:['zanahoria'],verduras:['verdura','verduras','vegetales'],cebolla:['cebolla']}},
+  {meal:'cena',name:'Tortilla de papa y espinaca',desc:'Papa tierna y espinaca unidas con huevo en una tortilla dorada.',ingredients:['papa','espinaca','huevos'],protein:22,time:25,boost:'Tomate fresco puede acompañarla.',keys:{papa:['papa','patata'],espinaca:['espinaca'],huevos:['huevo','huevos']}},
+  {meal:'almuerzo',name:'Ensalada tibia de arroz, huevo y arvejas',desc:'Arroz recién hecho con huevo y arvejas; funciona como plato único o guarnición.',ingredients:['arroz','huevos','arvejas'],protein:19,time:20,boost:'Cebolla salteada y limón le dan más sabor.'},
+  {meal:'almuerzo',name:'Pasta con espinaca y ricota',desc:'Fideos con espinaca salteada y ricota cremosa, listos en pocos pasos.',ingredients:['pasta','espinaca','ricota'],protein:22,time:20,boost:'Ajo y pimienta combinan muy bien.'},
+  {meal:'almuerzo',name:'Pollo al horno con papa y cebolla',desc:'Pollo y papas dorados juntos en una misma fuente.',ingredients:['pollo','papa','cebolla'],protein:32,time:40,boost:'Un poco de limón y orégano realza el pollo.'},
+  {meal:'almuerzo',name:'Quinoa con pollo y palta',desc:'Quinoa cocida con pollo en tiras y palta al final.',ingredients:['quinoa','pollo','palta'],protein:31,time:25,boost:'Tomate y limón aportan frescura.'},
+  {meal:'cena',name:'Calabaza rellena de lentejas y queso',desc:'Mitades de calabaza asadas, rellenas con lentejas y queso gratinado.',ingredients:['calabaza','lentejas','queso'],protein:22,time:40,boost:'Cebolla salteada queda bien en el relleno.'},
+  {meal:'cena',name:'Pescado al horno con tomate y cebolla',desc:'Filetes al horno sobre una base de tomate y cebolla.',ingredients:['pescado','tomate','cebolla'],protein:30,time:25,boost:'Limón y perejil fresco completan el plato.'},
+  {meal:'cena',name:'Tortilla de zapallito y queso',desc:'Zapallito salteado unido con huevo y queso, dorado en sartén.',ingredients:['zapallito','huevos','queso'],protein:23,time:20,boost:'Una ensalada de tomate acompaña muy bien.'},
+  {meal:'cena',name:'Arroz con tofu y calabaza',desc:'Tofu dorado con calabaza y arroz para una cena vegetal y completa.',ingredients:['tofu','calabaza','arroz'],protein:24,time:30,boost:'Ajo y comino le dan un sabor más intenso.'},
+  {meal:'desayuno',name:'Tortilla de avena, huevo y espinaca',desc:'Una tortilla salada y tierna para variar el desayuno.',ingredients:['avena','huevos','espinaca'],protein:21,time:15,boost:'Un poco de queso queda muy bien en la mezcla.'},
+  {meal:'desayuno',name:'Tostadas de ricota, pera y nueces',desc:'Ricota cremosa, pera fresca y nueces sobre pan tostado.',ingredients:['pan','ricota','pera','nueces'],protein:18,time:8,boost:'Canela combina muy bien con la pera.'},
+  {meal:'desayuno',name:'Huevos con champiñones y tomate',desc:'Champiñones dorados con huevo y tomate salteado.',ingredients:['huevos','champinones','tomate'],protein:23,time:15,boost:'Perejil o pimienta realzan el salteado.'},
+  {meal:'almuerzo',name:'Fideos salteados con pollo y brócoli',desc:'Fideos y pollo en tiras con brócoli, todo salteado en la misma sartén.',ingredients:['fideos','pollo','brocoli'],protein:31,time:25,boost:'Ajo y limón aportan un toque fresco.'},
+  {meal:'almuerzo',name:'Ensalada de porotos, huevo y tomate',desc:'Porotos tiernos con huevo duro y tomate en cubos.',ingredients:['porotos','huevos','tomate'],protein:23,time:15,boost:'Cebolla picada y limón le quedan bien.'},
+  {meal:'almuerzo',name:'Tarta rápida de zapallito y queso',desc:'Relleno suave de zapallito y queso en masa horneada.',ingredients:['masa para tarta','zapallito','huevos','queso'],protein:20,time:40,boost:'Tomate fresco puede acompañarla.',keys:{'masa para tarta':['masa para tarta','masa de tarta','tapa de tarta']}},
+  {meal:'merienda',name:'Licuado de pera, yogur y avena',desc:'Una merienda cremosa y fresca, lista en pocos minutos.',ingredients:['pera','yogur','avena'],protein:16,time:5,boost:'Canela da aroma sin agregar azúcar.'},
+  {meal:'merienda',name:'Tomate relleno de ricota y semillas',desc:'Tomate fresco con un relleno simple y cremoso.',ingredients:['tomate','ricota','semillas'],protein:13,time:10,boost:'Pimienta y unas gotas de limón combinan bien.'},
+  {meal:'merienda',name:'Huevo y palta con galletas',desc:'Huevo duro y palta pisada para untar sobre galletas.',ingredients:['huevos','palta','galletas'],protein:17,time:12,boost:'Limón evita que la palta se oscurezca.'},
+  {meal:'cena',name:'Sopa de zapallito, papa y queso',desc:'Una sopa suave con zapallito y papa, terminada con queso.',ingredients:['zapallito','papa','queso'],protein:17,time:30,boost:'Cebolla y pimienta aportan más sabor.'},
+  {meal:'cena',name:'Pollo relleno de espinaca y queso',desc:'Pechuga abierta y rellena, cocida en sartén hasta quedar dorada.',ingredients:['pollo','espinaca','queso'],protein:34,time:30,boost:'Limón y ajo combinan muy bien.'},
+  {meal:'cena',name:'Guiso de porotos, arroz y calabaza',desc:'Porotos y calabaza cocidos con arroz en un guiso espeso.',ingredients:['porotos','arroz','calabaza'],protein:19,time:35,boost:'Ajo y comino realzan el guiso.'},
+  {meal:'desayuno',name:'Panqueques de ricota y frutilla',desc:'Panqueques finos rellenos con ricota y frutillas frescas.',ingredients:['harina','leche','huevos','ricota','frutilla'],protein:22,time:20,boost:'Unas gotas de limón resaltan la fruta.'},
+  {meal:'desayuno',name:'Revuelto de tofu con tomate y espinaca',desc:'Tofu desmenuzado y dorado con tomate y espinaca.',ingredients:['tofu','tomate','espinaca'],protein:25,time:15,boost:'Ajo y pimienta le dan más sabor.'},
+  {meal:'desayuno',name:'Tostadas de palta, ricota y tomate',desc:'Pan tostado con ricota, palta pisada y tomate fresco.',ingredients:['pan','palta','ricota','tomate'],protein:17,time:8,boost:'Pimienta negra va muy bien.'},
+  {meal:'almuerzo',name:'Ensalada de pasta, huevo y arvejas',desc:'Pasta corta con huevo duro y arvejas, servida fría o tibia.',ingredients:['pasta','huevos','arvejas'],protein:22,time:20,boost:'Tomate en cubos y limón la hacen más fresca.'},
+  {meal:'almuerzo',name:'Quinoa con porotos y calabaza asada',desc:'Quinoa y porotos con cubos de calabaza dorados al horno.',ingredients:['quinoa','porotos','calabaza'],protein:21,time:35,boost:'Cebolla y comino quedan muy bien.'},
+  {meal:'almuerzo',name:'Pescado con arroz y espinaca',desc:'Filete de pescado a la plancha sobre arroz con espinaca salteada.',ingredients:['pescado','arroz','espinaca'],protein:30,time:25,boost:'Limón fresco combina con el pescado.'},
+  {meal:'merienda',name:'Hummus con galletas, pepino y tomate',desc:'Galletas crocantes con hummus y vegetales frescos para untar.',ingredients:['garbanzos','galletas','pepino','tomate'],protein:13,time:10,boost:'Limón y aceite de oliva realzan el hummus.'},
+  {meal:'merienda',name:'Yogur con granola y manzana',desc:'Yogur frío con manzana en cubos y granola crujiente.',ingredients:['yogur','granola','manzana'],protein:16,time:5,boost:'Canela le da aroma y dulzor.'},
+  {meal:'merienda',name:'Batido de cacao, pera y leche',desc:'Una bebida cremosa de fruta y cacao, lista al momento.',ingredients:['cacao','pera','leche'],protein:12,time:5,boost:'Usa cacao puro sin azúcar añadida.'},
+  {meal:'cena',name:'Frittata de brócoli y queso',desc:'Brócoli tierno ligado con huevo y queso, dorado en sartén.',ingredients:['brocoli','huevos','queso'],protein:24,time:20,boost:'Cebolla salteada suma sabor.'},
+  {meal:'cena',name:'Guiso de lentejas con papa y zanahoria',desc:'Lentejas cocidas a fuego lento con papa y zanahoria en cubos.',ingredients:['lentejas','papa','zanahoria'],protein:21,time:35,boost:'Ajo y comino realzan el caldo.'},
+  {meal:'cena',name:'Tofu al horno con batata y brócoli',desc:'Bandeja de tofu y batata dorados con brócoli tierno.',ingredients:['tofu','batata','brocoli'],protein:25,time:35,boost:'Limón y ajo van muy bien al servir.'},
+  {meal:'desayuno',name:'Yogur con mango, kiwi y granola',desc:'Un bol fresco con fruta jugosa y granola crocante.',ingredients:['yogur','mango','kiwi','granola'],protein:17,time:7,boost:'Unas semillas suman textura.'},
+  {meal:'desayuno',name:'Tostadas de banana y ricota',desc:'Pan tostado con ricota suave y banana en rodajas.',ingredients:['pan','banana','ricota'],protein:16,time:8,boost:'Canela combina bien con la banana.'},
+  {meal:'desayuno',name:'Avena con durazno y arándanos',desc:'Avena caliente con durazno tierno y arándanos al final.',ingredients:['avena','leche','durazno','arandanos'],protein:16,time:15,boost:'Canela aporta aroma sin azúcar añadida.'},
+  {meal:'almuerzo',name:'Ensalada de pollo, manzana y naranja',desc:'Pollo en tiras con hojas verdes y fruta fresca para un almuerzo agridulce.',ingredients:['pollo','manzana','naranja','lechuga'],protein:29,time:20,boost:'Nueces picadas aportan un toque crocante.'},
+  {meal:'almuerzo',name:'Quinoa con garbanzos y mango',desc:'Quinoa y garbanzos con mango y pepino en cubos.',ingredients:['quinoa','garbanzos','mango','pepino'],protein:20,time:25,boost:'Limón y aceite de oliva equilibran el dulzor.'},
+  {meal:'almuerzo',name:'Ensalada de espinaca, frutilla y ricota',desc:'Espinaca fresca con frutillas y ricota en bocados suaves.',ingredients:['espinaca','frutilla','ricota','nueces'],protein:18,time:10,boost:'Un toque de limón une los sabores.'},
+  {meal:'merienda',name:'Ensalada de frutas de estación',desc:'Manzana, banana, naranja, kiwi y uvas cortados en una copa fresca.',ingredients:['manzana','banana','naranja','kiwi','uvas'],protein:4,time:10,boost:'Yogur natural puede acompañarla.'},
+  {meal:'merienda',name:'Brochetas de frutilla, uvas y ananá',desc:'Fruta fresca en brochetas con yogur para untar o acompañar.',ingredients:['frutilla','uvas','anana','yogur'],protein:8,time:12,boost:'Enfríalas unos minutos antes de servir.'},
+  {meal:'merienda',name:'Licuado de durazno, banana y leche',desc:'Un batido espeso y naturalmente dulce con fruta madura.',ingredients:['durazno','banana','leche'],protein:12,time:5,boost:'Usa la fruta fría para no necesitar hielo.'},
+  {meal:'cena',name:'Pollo al horno con manzana y batata',desc:'Pollo, manzana y batata asados juntos en una fuente.',ingredients:['pollo','manzana','batata','cebolla'],protein:30,time:40,boost:'Tomillo o pimienta negra combinan bien.'},
+  {meal:'cena',name:'Pescado con naranja y arroz',desc:'Pescado a la plancha con naranja y arroz como guarnición.',ingredients:['pescado','naranja','arroz'],protein:29,time:25,boost:'Ralladura de naranja y limón realzan el pescado.'},
+  {meal:'cena',name:'Tofu salteado con ananá y morrón',desc:'Tofu dorado con ananá y morrón en un salteado agridulce.',ingredients:['tofu','anana','morron','arroz'],protein:23,time:25,boost:'Un poco de jengibre o ajo suma aroma.'},
+  {meal:'desayuno',name:'Jugo de naranja recién exprimido',desc:'Jugo fresco de naranja, sin azúcar agregada.',ingredients:['naranja'],protein:2,time:5,boost:'Sírvelo enseguida para disfrutarlo bien fresco.',noAddedSugar:true,category:'drink'},
+  {meal:'desayuno',name:'Limonada casera sin azúcar',desc:'Limón exprimido con agua fría y hielo, sin azúcar agregada.',ingredients:['limon'],protein:0,time:5,boost:'Ajusta la cantidad de agua a tu gusto.',noAddedSugar:true,category:'drink'},
+  {meal:'desayuno',name:'Jugo de naranja y zanahoria',desc:'Una mezcla cítrica y suave, preparada al momento.',ingredients:['naranja','zanahoria','limon'],protein:2,time:8,boost:'Cuélalo si prefieres una textura más liviana.',noAddedSugar:true,category:'drink'},
+  {meal:'desayuno',name:'Licuado de mango y naranja',desc:'Mango, naranja y yogur licuados en una bebida cremosa.',ingredients:['mango','naranja','yogur'],protein:8,time:5,boost:'Usa fruta madura para que quede dulce sin azúcar.',noAddedSugar:true,category:'drink'},
+  {meal:'merienda',name:'Jugo de mandarina y naranja',desc:'Cítricos exprimidos y mezclados para una merienda fresca.',ingredients:['mandarina','naranja'],protein:2,time:5,boost:'Puedes colarlo si prefieres menos pulpa.',noAddedSugar:true,category:'drink'},
+  {meal:'merienda',name:'Jugo de pomelo y naranja',desc:'Una bebida cítrica con el dulzor natural de la naranja.',ingredients:['pomelo','naranja'],protein:2,time:5,boost:'Agrega más naranja si prefieres un sabor menos intenso.',noAddedSugar:true,category:'drink'},
+  {meal:'merienda',name:'Agua fresca de sandía y lima',desc:'Sandía licuada con lima y agua fría, sin azúcar añadida.',ingredients:['sandia','lima'],protein:1,time:7,boost:'Sírvela con hielo y recién preparada.',noAddedSugar:true,category:'drink'},
+  {meal:'merienda',name:'Licuado de ananá y naranja',desc:'Ananá y naranja licuados con yogur para una bebida frutal.',ingredients:['anana','naranja','yogur'],protein:8,time:5,boost:'La fruta bien fría ayuda a que quede más refrescante.',noAddedSugar:true,category:'drink'},
+  {meal:'merienda',name:'Limonada de frutilla',desc:'Frutillas licuadas con limón y agua fría, sin azúcar agregada.',ingredients:['frutilla','limon'],protein:1,time:7,boost:'Cuélala si quieres una bebida más suave.',noAddedSugar:true,category:'drink'},
+  {meal:'almuerzo',name:'Milanesa vacuna al horno con puré',desc:'Milanesa de carne al horno con puré de papa suave.',ingredients:['carne vacuna','huevos','pan rallado','papa','leche'],protein:34,time:35,boost:'Acompáñala con tomate y lechuga.'},
+  {meal:'almuerzo',name:'Milanesa napolitana al horno',desc:'Milanesa al horno con tomate y una capa fina de queso gratinado.',ingredients:['carne vacuna','huevos','pan rallado','tomate','queso'],protein:36,time:35,boost:'Una ensalada verde completa el plato.'},
+  {meal:'almuerzo',name:'Chivito al plato liviano',desc:'Carne a la plancha con huevo, queso, tomate, lechuga y papas al horno.',ingredients:['carne vacuna','huevos','queso','tomate','lechuga','papa'],protein:39,time:35,boost:'Usa un corte magro y una porción moderada de queso.'},
+  {meal:'almuerzo',name:'Carne vacuna a la olla con verduras',desc:'Carne cocida despacio con papa, zanahoria y cebolla.',ingredients:['carne vacuna','papa','zanahoria','cebolla'],protein:32,time:50,boost:'Ajo y laurel perfuman el caldo.'},
+  {meal:'almuerzo',name:'Bife a caballo con papas al horno',desc:'Bife magro a la plancha con huevo y papas horneadas.',ingredients:['carne vacuna','huevos','papa'],protein:38,time:35,boost:'Sírvelo con una ensalada fresca.'},
+  {meal:'cena',name:'Milanesa de cerdo al horno con ensalada',desc:'Cerdo empanado al horno, servido con tomate y hojas verdes.',ingredients:['cerdo','huevos','pan rallado','tomate','lechuga'],protein:32,time:30,boost:'Retira la grasa visible y acompaña con limón.'},
+  {meal:'cena',name:'Bondiola de cerdo a la plancha con calabaza',desc:'Cerdo a la plancha con calabaza asada y cebolla.',ingredients:['cerdo','calabaza','cebolla'],protein:31,time:35,boost:'Elige un corte magro y cocina con poco aceite.'},
+  {meal:'cena',name:'Pastel de carne vacuna y papa al horno',desc:'Carne picada magra con cebolla, cubierta con puré dorado.',ingredients:['carne vacuna','papa','cebolla','leche'],protein:31,time:45,boost:'Puedes gratinar con una pequeña cantidad de queso.'},
+  {meal:'cena',name:'Cerdo al horno con manzana y batata',desc:'Cerdo magro con manzana, batata y cebolla, cocidos en una fuente.',ingredients:['cerdo','manzana','batata','cebolla'],protein:30,time:45,boost:'Usa una manzana ácida para equilibrar el plato.'},
+  {meal:'desayuno',name:'Café negro',desc:'Café preparado al momento, sin azúcar agregada.',ingredients:['cafe'],protein:1,time:5,boost:'Puedes acompañarlo con leche aparte.',noAddedSugar:true,category:'drink'},
+  {meal:'desayuno',name:'Café con leche',desc:'Café suave mezclado con leche caliente.',ingredients:['cafe','leche'],protein:6,time:5,boost:'Ajusta la proporción de leche a tu gusto.',noAddedSugar:true,category:'drink'},
+  {meal:'desayuno',name:'Té caliente',desc:'Una infusión simple para acompañar el desayuno o la merienda.',ingredients:['te'],protein:0,time:5,boost:'Déjalo reposar más o menos tiempo según la intensidad que prefieras.',noAddedSugar:true,category:'drink'},
+  {meal:'desayuno',name:'Mate tradicional',desc:'Mate uruguayo con yerba y agua caliente, sin azúcar agregada.',ingredients:['yerba mate'],protein:1,time:5,boost:'Usa agua caliente pero evita que hierva.',noAddedSugar:true,category:'drink'},
+  {meal:'merienda',name:'Mate cocido',desc:'Infusión de yerba mate servida en taza.',ingredients:['yerba mate'],protein:1,time:7,boost:'Puedes tomarlo amargo o agregar leche aparte.',noAddedSugar:true,category:'drink'},
+  {meal:'merienda',name:'Cacao caliente con leche',desc:'Leche caliente con cacao puro, sin azúcar añadida.',ingredients:['leche','cacao'],protein:9,time:7,boost:'Canela le da aroma sin endulzarlo.',noAddedSugar:true,category:'drink'},
+  {meal:'desayuno',name:'Tostadas integrales con ricota y frambuesas',desc:'Pan integral con ricota cremosa y fruta fresca, listo en pocos minutos.',ingredients:['pan integral','ricota','frambuesa'],protein:17,time:7,boost:'Si las frambuesas son ácidas, unas rodajas de banana equilibran el sabor.'},
+  {meal:'desayuno',name:'Avena con papaya y yogur',desc:'Avena tibia con papaya madura y una cucharada de yogur natural.',ingredients:['avena','papaya','yogur'],protein:16,time:12,boost:'Agrega canela al final para perfumarla.'},
+  {meal:'desayuno',name:'Frittata al horno de espinaca y ricota',desc:'Huevo, espinaca y ricota cuajados al horno en una fuente pequeña.',ingredients:['huevos','espinaca','ricota'],protein:24,time:22,boost:'Acompaña con tomate fresco si tienes.'},
+  {meal:'almuerzo',name:'Polenta con tuco de carne magra',desc:'Polenta suave con salsa casera de carne picada, tomate y cebolla.',ingredients:['polenta','carne picada magra','tomate','cebolla'],protein:29,time:35,boost:'Usa poca sal y deja que el tuco se cocine a fuego bajo.'},
+  {meal:'almuerzo',name:'Berenjena al horno rellena de lentejas',desc:'Mitades de berenjena asadas y rellenas con lentejas, tomate y un poco de queso.',ingredients:['berenjena','lentejas','tomate','queso'],protein:22,time:40,boost:'El perejil fresco combina bien con el relleno.'},
+  {meal:'almuerzo',name:'Ensalada tibia de remolacha, papa y huevo',desc:'Remolacha y papa cocidas con huevo duro y limón.',ingredients:['remolacha','papa','huevos'],protein:17,time:35,boost:'Añade perejil picado para darle frescura.'},
+  {meal:'almuerzo',name:'Cuscús con garbanzos, pepino y tomate',desc:'Cuscús hidratado con garbanzos y vegetales frescos, aliñado con limón.',ingredients:['cuscús','garbanzos','pepino','tomate'],protein:18,time:20,boost:'Sirve frío o a temperatura ambiente.'},
+  {meal:'almuerzo',name:'Tarta de puerro y ricota',desc:'Puerro salteado con ricota y huevo, horneado en una masa fina.',ingredients:['masa para tarta','puerro','ricota','huevos'],protein:20,time:45,boost:'Acompaña con una ensalada sencilla.'},
+  {meal:'merienda',name:'Yogur con papaya y semillas',desc:'Papaya fresca con yogur natural y semillas para una merienda rápida.',ingredients:['papaya','yogur','semillas'],protein:15,time:5,boost:'Elige yogur natural sin azúcar agregada.'},
+  {meal:'merienda',name:'Licuado de frambuesa, banana y yogur',desc:'Frambuesas y banana licuadas con yogur natural, sin azúcar añadida.',ingredients:['frambuesa','banana','yogur'],protein:10,time:5,boost:'Usa banana madura para endulzarlo naturalmente.',noAddedSugar:true,category:'drink'},
+  {meal:'cena',name:'Cerdo a la sartén con repollo morado y manzana',desc:'Cerdo magro sellado a la sartén con repollo morado y manzana salteados.',ingredients:['cerdo','repollo morado','manzana'],protein:30,time:25,boost:'Un toque de vinagre suaviza el dulzor de la manzana.'},
+  {meal:'cena',name:'Milanesa de berenjena al horno con ensalada',desc:'Berenjena rebozada al horno, servida con tomate y lechuga.',ingredients:['berenjena','huevos','pan rallado','tomate','lechuga'],protein:14,time:35,boost:'Pincela con poco aceite para que dore sin freír.'},
+  {meal:'cena',name:'Zapallitos rellenos de carne magra',desc:'Zapallitos al horno rellenos con carne picada, cebolla y tomate.',ingredients:['zapallito','carne picada magra','cebolla','tomate'],protein:28,time:40,boost:'Retira parte de la pulpa y mézclala con el relleno.'},
+  {meal:'cena',name:'Salmón al horno con hinojo y naranja',desc:'Salmón horneado sobre hinojo y naranja, con aceite de oliva y pimienta.',ingredients:['salmon','hinojo','naranja'],protein:31,time:30,boost:'El hinojo queda tierno y aromático al cocinarse junto al pescado.'},
+  {meal:'cena',name:'Pollo al horno con mandioca y limón',desc:'Pollo y mandioca asados en una fuente con limón y ajo.',ingredients:['pollo','mandioca','limon'],protein:32,time:50,boost:'Corta la mandioca en trozos parejos para que se cocine al mismo tiempo.'},
+  {meal:'cena',name:'Ensalada de cuscús, remolacha y garbanzos',desc:'Cuscús con remolacha asada y garbanzos, servido tibio con limón.',ingredients:['cuscús','remolacha','garbanzos','limon'],protein:17,time:30,boost:'Agrega menta fresca si tienes.'},
+  {meal:'merienda',name:'Licuado de papaya y naranja',desc:'Papaya madura y naranja licuadas con agua fría, sin azúcar agregada.',ingredients:['papaya','naranja'],protein:2,time:5,boost:'Sírvelo recién hecho y bien frío.',noAddedSugar:true,category:'drink'}
+];
+
+const recipeAddOns={
+  'Huevos revueltos con tostada y tomate':['manzana','banana','frutilla','naranja','pera'],
+  'Avena con yogur y banana':['nueces','mani','semillas'],
+  'Tostadas con queso y huevo':['manzana','banana','frutilla','naranja','pera'],
+  'Tortilla de espinaca con arroz':['tomate','zanahoria','morron','cebolla'],
+  'Lentejas con huevo y tomate':['zanahoria','morron','cebolla'],
+  'Pollo con arroz y verduras':['limon','ajo','perejil'],
+  'Yogur con avena y banana':['semillas','nueces','mani'],
+  'Tostadas con queso y tomate':['huevos'],
+  'Hummus con pan y zanahoria':['yogur'],
+  'Omelette de queso y verduras':['lechuga','pepino','tomate'],
+  'Garbanzos salteados con verduras':['huevos','queso'],
+  'Atún con papa y ensalada':['lechuga','espinaca','pepino'],
+  'Avena caliente con manzana y leche':['canela','nueces'],
+  'Omelette de queso y espinaca':['manzana','banana','frutilla','pan integral'],
+  'Yogur con frutilla y granola':['semillas','nueces'],
+  'Tostada de palta y huevo':['tomate','limon'],
+  'Panqueques de banana y avena':['yogur'],
+  'Tostadas con ricota y miel':['manzana','banana','frutilla','pera'],
+  'Licuado de leche, banana y maní':['avena'],
+  'Carne con papas y zanahoria':['cebolla'],
+  'Pasta con atún y tomate':['aceitunas'],
+  'Quinoa con garbanzos y pepino':['limon','aceite'],
+  'Arroz salteado con tofu y brócoli':['ajo'],
+  'Pasta con tomate y queso':['espinaca','champinones'],
+  'Pollo con batata y brócoli':['limon','aceite'],
+  'Porotos con calabaza y espinaca':['ajo','cebolla'],
+  'Yogur con manzana y nueces':['canela'],
+  'Hummus con pepino y galletas':['zanahoria'],
+  'Tostadas de ricota con frutilla':['miel'],
+  'Tostada con palta y queso':['tomate'],
+  'Licuado de banana, leche y avena':['canela','cacao'],
+  'Manzana con crema de maní':['yogur'],
+  'Queso con galletas y tomate':['lechuga','espinaca'],
+  'Pescado con papa y brócoli':['limon'],
+  'Frittata de papa y cebolla':['lechuga','espinaca'],
+  'Tacos de carne con morrón':['tomate','yogur'],
+  'Tofu con fideos y verduras':['ajo'],
+  'Sopa de lentejas y zanahoria':['huevos','queso'],
+  'Pollo con calabaza y espinaca':['ajo','limon'],
+  'Ensalada de atún, choclo y huevo':['papa','lechuga','espinaca'],
+  'Avena tibia con pera y canela':['nueces'],
+  'Yogur natural con frutillas, chía y nueces':['semillas'],
+  'Pudín de chía con banana y leche':['frutilla'],
+  'Tostadas de ricota con manzana y canela':['nueces'],
+  'Tortitas de banana y avena':['yogur'],
+  'Yogur con banana y cacao':['cacao'],
+  'Manzana tibia con ricota y nueces':['canela'],
+  'Licuado de frutilla, banana y leche':['banana'],
+  'Bocaditos de avena, banana y maní':['mani'],
+  'Pudín de chía con frutilla y yogur':['semillas'],
+  'Tostadas de hummus y tomate':['palta','limon'],
+  'Yogur con pera y avena':['canela','nueces'],
+  'Hamburguesas de lentejas y avena':['tomate','lechuga','queso'],
+  'Arroz salteado con huevo y verduras':['ajo','salsa de soja'],
+  'Tarta de espinaca y queso':['tomate','lechuga'],
+  'Zapallitos rellenos de arroz y queso':['tomate','queso'],
+  'Sopa de verduras y garbanzos':['ajo','limon'],
+  'Ensalada tibia de arroz, huevo y arvejas':['Cocina el arroz y las arvejas hasta que estén tiernos.','Hierve los huevos, enfríalos y córtalos.','Mezcla todo y sirve tibio con limón si tienes.'],
+  'Pasta con espinaca y ricota':['Hierve la pasta en agua con sal y reserva un poco del agua de cocción.','Saltea la espinaca hasta que se ablande.','Mezcla con la ricota y la pasta; aligera con un chorrito del agua reservada.'],
+  'Pollo al horno con papa y cebolla':['Corta las papas y la cebolla en trozos parejos.','Colócalos en una fuente con el pollo, aceite y condimentos.','Hornea hasta que las papas estén tiernas y el pollo completamente cocido.'],
+  'Quinoa con pollo y palta':['Enjuaga y cocina la quinoa según el envase.','Cocina el pollo en una sartén hasta que esté completamente hecho y córtalo en tiras.','Sirve sobre la quinoa y añade la palta en cubos.'],
+  'Calabaza rellena de lentejas y queso':['Corta la calabaza al medio y ásala hasta que esté tierna.','Cocina las lentejas; retira parte de la pulpa de la calabaza y mézclala con ellas.','Rellena las mitades, cubre con queso y gratina unos minutos.'],
+  'Pescado al horno con tomate y cebolla':['Corta el tomate y la cebolla y distribúyelos en una fuente.','Pon el pescado encima, agrega aceite y condimentos.','Hornea hasta que el pescado esté opaco y se desmenuce fácilmente.'],
+  'Tortilla de zapallito y queso':['Corta y saltea el zapallito hasta que pierda parte del líquido.','Mézclalo con los huevos batidos y el queso.','Cocina a fuego bajo, da vuelta la tortilla y termina de dorar.'],
+  'Arroz con tofu y calabaza':['Cocina el arroz y reserva.','Dora el tofu en cubos; añade la calabaza en trozos pequeños y cocina hasta que esté tierna.','Incorpora el arroz y condimenta a gusto.'],
+  'Tortilla de papa y espinaca':['tomate','cebolla'],
+  'Ensalada tibia de arroz, huevo y arvejas':['cebolla','limon'],
+  'Pasta con espinaca y ricota':['ajo','pimienta'],
+  'Pollo al horno con papa y cebolla':['limon','oregano'],
+  'Quinoa con pollo y palta':['tomate','limon'],
+  'Calabaza rellena de lentejas y queso':['cebolla','ajo'],
+  'Pescado al horno con tomate y cebolla':['limon','perejil'],
+  'Tortilla de zapallito y queso':['tomate','cebolla'],
+  'Arroz con tofu y calabaza':['ajo','comino'],
+  'Tortilla de avena, huevo y espinaca':['queso','tomate'],
+  'Tostadas de ricota, pera y nueces':['canela'],
+  'Huevos con champiñones y tomate':['perejil','pimienta'],
+  'Fideos salteados con pollo y brócoli':['ajo','limon'],
+  'Ensalada de porotos, huevo y tomate':['cebolla','limon'],
+  'Tarta rápida de zapallito y queso':['tomate','cebolla'],
+  'Licuado de pera, yogur y avena':['canela'],
+  'Tomate relleno de ricota y semillas':['limon','pimienta'],
+  'Huevo y palta con galletas':['limon'],
+  'Sopa de zapallito, papa y queso':['cebolla','pimienta'],
+  'Pollo relleno de espinaca y queso':['limon','ajo'],
+  'Guiso de porotos, arroz y calabaza':['ajo','comino'],
+  'Panqueques de ricota y frutilla':['limon'],
+  'Revuelto de tofu con tomate y espinaca':['ajo','pimienta'],
+  'Tostadas de palta, ricota y tomate':['pimienta'],
+  'Ensalada de pasta, huevo y arvejas':['tomate','limon'],
+  'Quinoa con porotos y calabaza asada':['cebolla','comino'],
+  'Pescado con arroz y espinaca':['limon'],
+  'Hummus con galletas, pepino y tomate':['limon','aceite'],
+  'Yogur con granola y manzana':['canela'],
+  'Batido de cacao, pera y leche':['canela'],
+  'Frittata de brócoli y queso':['cebolla'],
+  'Guiso de lentejas con papa y zanahoria':['ajo','comino'],
+  'Tofu al horno con batata y brócoli':['limon','ajo'],
+  'Yogur con mango, kiwi y granola':['semillas','nueces'],
+  'Tostadas de banana y ricota':['canela','miel'],
+  'Avena con durazno y arándanos':['canela','nueces'],
+  'Ensalada de pollo, manzana y naranja':['nueces','limon'],
+  'Quinoa con garbanzos y mango':['limon','aceite'],
+  'Ensalada de espinaca, frutilla y ricota':['nueces','limon'],
+  'Ensalada de frutas de estación':['yogur'],
+  'Brochetas de frutilla, uvas y ananá':['yogur'],
+  'Licuado de durazno, banana y leche':['avena'],
+  'Pollo al horno con manzana y batata':['tomillo','pimienta'],
+  'Pescado con naranja y arroz':['limon'],
+  'Tofu salteado con ananá y morrón':['ajo','jengibre'],
+  'Tostadas integrales con ricota y frambuesas':['canela'],
+  'Avena con papaya y yogur':['semillas'],
+  'Frittata al horno de espinaca y ricota':['tomate'],
+  'Polenta con tuco de carne magra':['queso'],
+  'Berenjena al horno rellena de lentejas':['cebolla','ajo'],
+  'Ensalada tibia de remolacha, papa y huevo':['perejil'],
+  'Cuscús con garbanzos, pepino y tomate':['limon','aceite'],
+  'Tarta de puerro y ricota':['tomate'],
+  'Yogur con papaya y semillas':['granola'],
+  'Cerdo a la sartén con repollo morado y manzana':['cebolla'],
+  'Milanesa de berenjena al horno con ensalada':['limon'],
+  'Zapallitos rellenos de carne magra':['queso'],
+  'Salmón al horno con hinojo y naranja':['limon'],
+  'Pollo al horno con mandioca y limón':['cebolla'],
+  'Ensalada de cuscús, remolacha y garbanzos':['queso']
+};
+
+const ingredientAmounts={
+  huevos:{amount:2,unit:'unidades'},pan:{amount:2,unit:'rebanadas'},
+  tomate:{amount:1,unit:'unidad'},espinaca:{amount:100,unit:'g'},
+  arroz:{amount:140,unit:'g en seco'},pollo:{amount:300,unit:'g'},
+  verduras:{amount:200,unit:'g'},avena:{amount:80,unit:'g'},
+  yogur:{amount:250,unit:'g'},banana:{amount:1,unit:'unidad'},
+  queso:{amount:60,unit:'g'},lentejas:{amount:160,unit:'g secas'},
+  garbanzos:{amount:240,unit:'g cocidos'},zanahoria:{amount:1,unit:'unidad'},
+  acelga:{amount:100,unit:'g'},coliflor:{amount:200,unit:'g'},
+  papa:{amount:300,unit:'g'},atun:{amount:1,unit:'lata'},'atún':{amount:1,unit:'lata'},
+  carne:{amount:300,unit:'g'},'carne vacuna':{amount:300,unit:'g'},
+  cerdo:{amount:300,unit:'g'},'pan rallado':{amount:100,unit:'g'},
+  pescado:{amount:300,unit:'g'},
+  leche:{amount:300,unit:'ml'},frutilla:{amount:150,unit:'g'},
+  manzana:{amount:1,unit:'unidad'},pera:{amount:1,unit:'unidad'},
+  palta:{amount:1,unit:'unidad'},mani:{amount:30,unit:'g'},
+  nueces:{amount:30,unit:'g'},semillas:{amount:20,unit:'g'},
+  granola:{amount:50,unit:'g'},quinoa:{amount:140,unit:'g en seco'},
+  porotos:{amount:240,unit:'g cocidos'},tofu:{amount:250,unit:'g'},
+  brocoli:{amount:200,unit:'g'},morron:{amount:1,unit:'unidad'},
+  cebolla:{amount:1,unit:'unidad'},calabaza:{amount:250,unit:'g'},
+  choclo:{amount:150,unit:'g'},pasta:{amount:160,unit:'g en seco'},
+  fideos:{amount:160,unit:'g en seco'},ricota:{amount:100,unit:'g'},
+  batata:{amount:300,unit:'g'},pepino:{amount:1,unit:'unidad'},
+  galletas:{amount:8,unit:'unidades'},cacao:{amount:10,unit:'g'},
+  miel:{amount:15,unit:'g'},
+  'masa para tarta':{amount:1,unit:'tapa'},
+  'pan integral':{amount:2,unit:'rebanadas'},
+  berenjena:{amount:1,unit:'unidad'},remolacha:{amount:2,unit:'unidades'},
+  polenta:{amount:120,unit:'g en seco'},'carne picada magra':{amount:250,unit:'g'},
+  'repollo morado':{amount:150,unit:'g'},papaya:{amount:200,unit:'g'},
+  frambuesa:{amount:100,unit:'g'},puerro:{amount:1,unit:'unidad'},
+  hinojo:{amount:1,unit:'bulbo'},mandioca:{amount:300,unit:'g'},'cuscús':{amount:120,unit:'g en seco'},
+  zapallito:{amount:2,unit:'unidades'},
+  arvejas:{amount:100,unit:'g'},champinones:{amount:150,unit:'g'},
+  harina:{amount:120,unit:'g'},mango:{amount:1,unit:'unidad'},
+  kiwi:{amount:2,unit:'unidades'},uvas:{amount:100,unit:'g'},
+  naranja:{amount:2,unit:'unidades'},limon:{amount:2,unit:'unidades'},
+  mandarina:{amount:4,unit:'unidades'},pomelo:{amount:1,unit:'unidad'},lima:{amount:1,unit:'unidad'},
+  durazno:{amount:1,unit:'unidad'},arandanos:{amount:80,unit:'g'},
+  anana:{amount:150,unit:'g'},melon:{amount:150,unit:'g'},
+  sandia:{amount:150,unit:'g'},ciruela:{amount:2,unit:'unidades'},
+  cerezas:{amount:100,unit:'g'},cafe:{amount:20,unit:'g'},
+  te:{amount:2,unit:'saquitos'},'yerba mate':{amount:40,unit:'g'}
+};
+
+const recipeSteps={
+  'Ensalada tibia de arroz, huevo y arvejas':['Cocina el arroz y las arvejas hasta que estén tiernos.','Hierve los huevos, enfríalos y córtalos.','Mezcla todo y sirve tibio con limón si tienes.'],
+  'Pasta con espinaca y ricota':['Hierve la pasta en agua con sal y reserva un poco del agua de cocción.','Saltea la espinaca hasta que se ablande.','Mezcla con la ricota y la pasta; aligera con un chorrito del agua reservada.'],
+  'Pollo al horno con papa y cebolla':['Corta las papas y la cebolla en trozos parejos.','Colócalos en una fuente con el pollo, aceite y condimentos.','Hornea hasta que las papas estén tiernas y el pollo completamente cocido.'],
+  'Quinoa con pollo y palta':['Enjuaga y cocina la quinoa según el envase.','Cocina el pollo en una sartén hasta que esté completamente hecho y córtalo en tiras.','Sirve sobre la quinoa y añade la palta en cubos.'],
+  'Calabaza rellena de lentejas y queso':['Corta la calabaza al medio y ásala hasta que esté tierna.','Cocina las lentejas; retira parte de la pulpa de la calabaza y mézclala con ellas.','Rellena las mitades, cubre con queso y gratina unos minutos.'],
+  'Pescado al horno con tomate y cebolla':['Corta el tomate y la cebolla y distribúyelos en una fuente.','Pon el pescado encima, agrega aceite y condimentos.','Hornea hasta que el pescado esté opaco y se desmenuce fácilmente.'],
+  'Tortilla de zapallito y queso':['Corta y saltea el zapallito hasta que pierda parte del líquido.','Mézclalo con los huevos batidos y el queso.','Cocina a fuego bajo, da vuelta la tortilla y termina de dorar.'],
+  'Arroz con tofu y calabaza':['Cocina el arroz y reserva.','Dora el tofu en cubos; añade la calabaza en trozos pequeños y cocina hasta que esté tierna.','Incorpora el arroz y condimenta a gusto.'],
+  'Huevos revueltos con tostada y tomate':['Tuesta el pan y corta el tomate.','Bate los huevos y revuélvelos en una sartén a fuego bajo.','Sirve con el tomate y la tostada.'],
+  'Avena con yogur y banana':['Coloca el yogur en un bol.','Añade la avena y la banana en rodajas.','Mezcla y sirve; puedes dejarla reposar unos minutos para ablandar la avena.'],
+  'Tostadas con queso y huevo':['Tuesta el pan.','Cocina el huevo a tu gusto.','Sirve sobre las tostadas con el queso.'],
+  'Tortilla de espinaca con arroz':['Cocina el arroz hasta que esté tierno.','Saltea la espinaca hasta que se ablande y añade los huevos batidos.','Cocina la tortilla por ambos lados y sírvela con el arroz.'],
+  'Lentejas con huevo y tomate':['Cocina las lentejas hasta que estén tiernas.','Saltea el tomate y mézclalo con las lentejas.','Cocina el huevo aparte y sírvelo encima.'],
+  'Pollo con arroz y verduras':['Cocina el arroz.','Cocina el pollo en una sartén hasta que esté completamente hecho.','Saltea las verduras y sírvelas junto al arroz y el pollo.'],
+  'Yogur con avena y banana':['Coloca el yogur en un bol.','Agrega la avena y la banana cortada.','Mezcla y sirve.'],
+  'Tostadas con queso y tomate':['Tuesta el pan.','Corta el tomate y colócalo sobre las tostadas.','Añade el queso y sirve.'],
+  'Hummus con pan y zanahoria':['Corta la zanahoria en bastones.','Tuesta o corta el pan.','Sirve con el hummus para untar.'],
+  'Omelette de queso y verduras':['Corta las verduras y saltéalas hasta que estén tiernas.','Bate los huevos, viértelos en la sartén y añade el queso.','Dobla el omelette cuando el huevo esté casi cuajado y termina de cocinar.'],
+  'Garbanzos salteados con verduras':['Cocina el arroz si lo vas a usar como acompañamiento.','Saltea las verduras; agrega los garbanzos y calienta todo junto.','Sirve solo o sobre el arroz.'],
+  'Atún con papa y ensalada':['Hierve la papa hasta que esté tierna y córtala.','Mezcla el atún con el tomate cortado.','Sirve con la papa y las hojas de ensalada.'],
+  'Avena caliente con manzana y leche':['Calienta la leche en una olla y agrega la avena.','Cocina a fuego bajo, revolviendo, hasta que espese.','Añade la manzana cortada y sirve.'],
+  'Omelette de queso y espinaca':['Saltea la espinaca hasta que se ablande.','Bate los huevos, viértelos en la sartén y agrega el queso.','Dobla el omelette y cocina hasta que el huevo cuaje.'],
+  'Yogur con frutilla y granola':['Lava y corta las frutillas.','Coloca el yogur en un bol y añade la fruta.','Agrega la granola justo antes de servir.'],
+  'Tostada de palta y huevo':['Tuesta el pan y pisa la palta con un tenedor.','Cocina el huevo a tu gusto.','Unta la palta en el pan y coloca el huevo encima.'],
+  'Panqueques de banana y avena':['Pisa la banana y mézclala con la avena y los huevos.','Vierte porciones pequeñas en una sartén aceitada.','Dora por ambos lados y sirve.'],
+  'Tostadas con ricota y miel':['Tuesta el pan.','Unta la ricota sobre las tostadas.','Añade la miel por encima y sirve.'],
+  'Licuado de leche, banana y maní':['Pela y corta la banana.','Licúa la banana con la leche y el maní.','Sirve enseguida.'],
+  'Carne con papas y zanahoria':['Corta las papas y la zanahoria en trozos.','Dora la carne en una olla; añade las verduras y agua suficiente.','Cocina tapado hasta que la carne y las verduras estén tiernas.'],
+  'Pasta con atún y tomate':['Hierve la pasta según las indicaciones del paquete y escúrrela.','Calienta el tomate en una sartén y agrega el atún.','Mezcla con la pasta y sirve.'],
+  'Quinoa con garbanzos y pepino':['Enjuaga y cocina la quinoa; déjala entibiar.','Corta el pepino y mezcla con los garbanzos.','Añade la quinoa y aliña antes de servir.'],
+  'Arroz salteado con tofu y brócoli':['Cocina el arroz y corta el tofu y el brócoli.','Dora el tofu en una sartén y agrega el brócoli.','Añade el arroz y saltea todo junto hasta que esté caliente.'],
+  'Pasta con tomate y queso':['Hierve la pasta según las indicaciones del paquete y escúrrela.','Calienta el tomate en una sartén y añade la pasta.','Agrega el queso y mezcla hasta que empiece a derretirse.'],
+  'Pollo con batata y brócoli':['Corta la batata y cocina el brócoli hasta que estén tiernos.','Cocina el pollo en una sartén hasta que esté completamente hecho.','Sirve el pollo con las verduras y añade limón si tienes.'],
+  'Porotos con calabaza y espinaca':['Cocina la calabaza en cubos hasta que esté tierna.','Añade los porotos y la espinaca; cocina hasta que la espinaca se ablande.','Mezcla con cuidado y sirve caliente.'],
+  'Yogur con manzana y nueces':['Corta la manzana en cubos o láminas.','Sirve el yogur en un bol y agrega la manzana.','Añade las nueces antes de comer.'],
+  'Hummus con pepino y galletas':['Lava y corta el pepino en rodajas o bastones.','Coloca el hummus en un recipiente.','Sirve con el pepino y las galletas.'],
+  'Tostadas de ricota con frutilla':['Tuesta el pan y lava y corta las frutillas.','Unta la ricota sobre las tostadas.','Añade las frutillas y sirve.'],
+  'Tostada con palta y queso':['Tuesta el pan y pisa la palta.','Unta la palta y agrega el queso.','Sirve enseguida.'],
+  'Licuado de banana, leche y avena':['Pela y corta la banana.','Licúa la banana con la leche y la avena.','Deja reposar un par de minutos si quieres que espese y sirve.'],
+  'Manzana con crema de maní':['Lava y corta la manzana en gajos.','Coloca la crema de maní en un recipiente pequeño.','Sirve la manzana para untar.'],
+  'Queso con galletas y tomate':['Lava y corta el tomate.','Corta el queso en porciones.','Sirve junto con las galletas.'],
+  'Pescado con papa y brócoli':['Hierve la papa hasta que esté tierna y cocina el brócoli.','Cocina el pescado en una sartén hasta que esté hecho por dentro.','Sirve con las verduras y añade limón si tienes.'],
+  'Frittata de papa y cebolla':['Cocina la papa en cubos hasta que esté tierna y saltea la cebolla.','Bate los huevos y mézclalos con la papa y la cebolla.','Cocina en una sartén a fuego bajo hasta que cuaje; da vuelta con cuidado.'],
+  'Tacos de carne con morrón':['Corta el morrón y cocina la carne en una sartén.','Añade el morrón y cocina hasta que esté tierno.','Sirve la mezcla dentro del pan o las tortillas.'],
+  'Tofu con fideos y verduras':['Cocina los fideos según las indicaciones del paquete y escúrrelos.','Dora el tofu en una sartén y añade las verduras.','Agrega los fideos y saltea todo junto hasta que esté caliente.'],
+  'Sopa de lentejas y zanahoria':['Pica la cebolla y corta la zanahoria en cubos.','Cocínalas unos minutos en una olla; agrega las lentejas y agua.','Hierve a fuego bajo hasta que las lentejas estén tiernas.'],
+  'Pollo con calabaza y espinaca':['Corta la calabaza y cocínala hasta que esté tierna.','Cocina el pollo en una sartén hasta que esté completamente hecho.','Añade la espinaca y cocina hasta que se ablande; sirve con el pollo y la calabaza.'],
+  'Ensalada de atún, choclo y huevo':['Hierve los huevos hasta que estén cocidos y déjalos enfriar.','Mezcla el atún con el choclo.','Corta los huevos y agrégalos a la ensalada antes de servir.'],
+  'Avena tibia con pera y canela':['Cocina la avena con leche a fuego bajo, revolviendo.','Corta la pera y añádela cuando la avena esté cremosa.','Espolvorea canela y sirve tibia.'],
+  'Yogur natural con frutillas, chía y nueces':['Lava y corta las frutillas.','Mezcla el yogur con la chía y deja reposar unos minutos.','Añade las frutillas y las nueces antes de servir.'],
+  'Pudín de chía con banana y leche':['Mezcla la chía con la leche.','Refrigera varias horas, idealmente toda la noche, hasta que espese.','Añade la banana en rodajas antes de servir.'],
+  'Tostadas de ricota con manzana y canela':['Tuesta el pan y corta la manzana en láminas.','Unta la ricota sobre las tostadas.','Coloca la manzana encima y espolvorea canela.'],
+  'Tortitas de banana y avena':['Pisa la banana y mézclala con la avena y los huevos.','Cocina porciones pequeñas en una sartén a fuego medio-bajo.','Dales vuelta cuando los bordes estén firmes y termina de dorarlas.'],
+  'Yogur con banana y cacao':['Pisa o corta la banana.','Mézclala con el yogur y el cacao.','Sirve frío.'],
+  'Manzana tibia con ricota y nueces':['Corta la manzana y caliéntala en una sartén con un poco de agua.','Cuando esté tierna, sírvela con la ricota.','Añade las nueces por encima.'],
+  'Licuado de frutilla, banana y leche':['Lava las frutillas y pela la banana.','Licúa la fruta con la leche hasta que quede homogéneo.','Sirve enseguida.'],
+  'Bocaditos de avena, banana y maní':['Pisa la banana y mézclala con la avena y el maní.','Forma bocaditos y colócalos en una bandeja.','Hornea a 180 °C hasta que estén firmes y ligeramente dorados.'],
+  'Pudín de chía con frutilla y yogur':['Mezcla la chía con el yogur y deja reposar en la heladera varias horas.','Lava y corta las frutillas.','Sirve el pudín con las frutillas encima.'],
+  'Tostadas de hummus y tomate':['Tuesta el pan y corta el tomate.','Unta el hummus sobre las tostadas.','Añade el tomate y sirve.'],
+  'Yogur con pera y avena':['Corta la pera en cubos o láminas.','Coloca el yogur en un bol y agrega la avena.','Añade la pera y mezcla.'],
+  'Hamburguesas de lentejas y avena':['Escurre las lentejas y pisa aproximadamente la mitad.','Mézclalas con la avena, el huevo y la cebolla picada; forma medallones.','Dóralos en una sartén con un poco de aceite, unos minutos por lado.'],
+  'Arroz salteado con huevo y verduras':['Saltea las verduras en una sartén hasta que estén tiernas.','Agrega el arroz cocido y caliéntalo; aparta todo a un lado y revuelve el huevo en la sartén.','Mezcla bien cuando el huevo esté cocido y sirve.'],
+  'Tarta de espinaca y queso':['Precalienta el horno a 180 °C y coloca la masa en una tartera.','Saltea la cebolla y la espinaca; mézclalas con los huevos batidos y el queso.','Vierte el relleno sobre la masa y hornea unos 30 minutos, hasta que cuaje.'],
+  'Zapallitos rellenos de arroz y queso':['Corta los zapallitos a lo largo y cocina las mitades hasta que empiecen a ablandarse; retira parte del centro.','Mezcla la pulpa picada con el arroz cocido, la cebolla salteada y la mitad del queso.','Rellena, cubre con el queso restante y hornea a 190 °C hasta que gratine.'],
+  'Sopa de verduras y garbanzos':['Pica la cebolla y la zanahoria; saltéalas unos minutos en una olla.','Agrega las verduras, los garbanzos y agua o caldo; cocina a fuego medio hasta que todo esté tierno.','Prueba, ajusta la sal y sirve caliente.'],
+  'Tortilla de papa y espinaca':['Cocina la papa en cubos hasta que esté tierna y escurre el agua.','Saltea la espinaca, mézclala con la papa y los huevos batidos.','Cocina a fuego bajo hasta que cuaje; da vuelta con cuidado y termina de dorar.'],
+  'Tortilla de avena, huevo y espinaca':['Bate los huevos y mézclalos con la avena; deja reposar unos minutos.','Saltea la espinaca y agrégala a la mezcla.','Cocina en sartén a fuego bajo hasta que cuaje; da vuelta y termina de dorar.'],
+  'Tostadas de ricota, pera y nueces':['Tuesta el pan hasta que quede dorado.','Unta la ricota y acomoda la pera en láminas.','Termina con las nueces picadas.'],
+  'Huevos con champiñones y tomate':['Limpia y corta los champiñones; corta también el tomate.','Dora los champiñones en una sartén y añade el tomate.','Agrega los huevos batidos y revuelve hasta que estén cocidos.'],
+  'Fideos salteados con pollo y brócoli':['Hierve los fideos y cocina el brócoli hasta que esté tierno pero firme.','Cocina el pollo en tiras en una sartén hasta que esté completamente hecho.','Añade los fideos y el brócoli, mezcla y sirve caliente.'],
+  'Ensalada de porotos, huevo y tomate':['Hierve los huevos hasta que estén duros y déjalos enfriar.','Escurre y enjuaga los porotos si son en conserva; corta el tomate.','Mezcla y sirve con el huevo en cuartos.'],
+  'Tarta rápida de zapallito y queso':['Precalienta el horno a 180 °C y coloca la masa en una tartera.','Saltea el zapallito hasta que pierda líquido; mézclalo con huevo y queso.','Vierte el relleno sobre la masa y hornea hasta que cuaje y se dore.'],
+  'Licuado de pera, yogur y avena':['Lava y corta la pera, retirando las semillas.','Licúa la pera con el yogur y la avena hasta que quede homogéneo.','Sirve frío; agrega un poco de agua si lo prefieres más liviano.'],
+  'Tomate relleno de ricota y semillas':['Corta la parte superior del tomate y retira parte de la pulpa.','Mezcla la ricota con las semillas y pimienta.','Rellena el tomate y sirve frío.'],
+  'Huevo y palta con galletas':['Hierve los huevos hasta que estén duros y enfríalos.','Pisa la palta y mézclala con el huevo picado.','Sirve sobre las galletas justo antes de comer.'],
+  'Sopa de zapallito, papa y queso':['Corta el zapallito y la papa en cubos pequeños.','Cocínalos en una olla con agua hasta que estén muy tiernos; escurre parte del líquido.','Pisa o procesa, incorpora el queso y calienta suavemente hasta que se funda.'],
+  'Pollo relleno de espinaca y queso':['Abre la pechuga en forma de bolsillo y saltea la espinaca.','Rellena con espinaca y queso; cierra con palillos si hace falta.','Dora de ambos lados y cocina tapado hasta que el pollo esté completamente hecho.'],
+  'Guiso de porotos, arroz y calabaza':['Corta la calabaza en cubos y cocina junto con el arroz en una olla con agua.','Cuando estén casi tiernos, agrega los porotos cocidos y condimenta.','Cocina unos minutos más hasta que el guiso espese.'],
+  'Panqueques de ricota y frutilla':['Bate la harina con la leche y los huevos hasta que no queden grumos.','Vierte una capa fina en una sartén caliente y cocina por ambos lados; repite.','Rellena con ricota y frutillas cortadas.'],
+  'Revuelto de tofu con tomate y espinaca':['Escurre el tofu y desmenúzalo con un tenedor.','Dóralo en una sartén y agrega tomate en cubos.','Añade la espinaca y cocina hasta que se ablande.'],
+  'Tostadas de palta, ricota y tomate':['Tuesta el pan.','Unta una capa de ricota y agrega la palta pisada.','Termina con tomate en rodajas y sirve.'],
+  'Ensalada de pasta, huevo y arvejas':['Hierve la pasta y las arvejas hasta que estén tiernas; escurre.','Cocina los huevos hasta que estén duros, enfría y corta.','Mezcla todo y sirve tibio o frío.'],
+  'Quinoa con porotos y calabaza asada':['Corta la calabaza en cubos y ásala hasta que esté dorada y tierna.','Enjuaga y cocina la quinoa; calienta los porotos si lo prefieres.','Sirve la quinoa con los porotos y la calabaza encima.'],
+  'Pescado con arroz y espinaca':['Cocina el arroz hasta que esté tierno.','Cocina el pescado en una sartén hasta que esté opaco y se desmenuce fácilmente.','Saltea la espinaca y sirve junto con el arroz y el pescado.'],
+  'Hummus con galletas, pepino y tomate':['Escurre y enjuaga los garbanzos; procésalos con aceite, limón y un poco de agua.','Corta el pepino y el tomate en bastones o cubos.','Sirve el hummus para untar con las galletas y vegetales.'],
+  'Yogur con granola y manzana':['Lava y corta la manzana en cubos pequeños.','Coloca el yogur en un bol y añade la manzana.','Agrega la granola justo antes de comer para que siga crocante.'],
+  'Batido de cacao, pera y leche':['Lava la pera, retira las semillas y córtala.','Licúa con la leche y el cacao hasta que quede cremoso.','Sirve frío.'],
+  'Frittata de brócoli y queso':['Cocina el brócoli hasta que esté tierno pero firme y córtalo pequeño.','Mézclalo con los huevos batidos y el queso.','Cocina tapado a fuego bajo hasta que cuaje; dora el otro lado con cuidado.'],
+  'Guiso de lentejas con papa y zanahoria':['Corta la papa y la zanahoria en cubos pequeños.','Cocina las lentejas en una olla con agua; añade las verduras y cocina hasta que estén tiernas.','Condimenta y deja reposar unos minutos antes de servir.'],
+  'Tofu al horno con batata y brócoli':['Calienta el horno a 200 °C y corta la batata y el tofu en cubos.','Distribuye en una fuente con aceite y condimentos; hornea 20 minutos.','Añade el brócoli y hornea 10 minutos más, hasta que esté tierno.'],
+  'Yogur con mango, kiwi y granola':['Pela y corta el mango y el kiwi en cubos.','Sirve el yogur en un bol y agrega la fruta.','Añade la granola justo antes de comer para que quede crocante.'],
+  'Tostadas de banana y ricota':['Tuesta el pan hasta que esté dorado.','Unta la ricota sobre las tostadas.','Agrega la banana en rodajas y sirve enseguida.'],
+  'Avena con durazno y arándanos':['Calienta la leche y agrega la avena; cocina a fuego bajo hasta que espese.','Corta el durazno en cubos y añádelo durante los últimos minutos.','Sirve con los arándanos por encima.'],
+  'Ensalada de pollo, manzana y naranja':['Cocina el pollo en una sartén hasta que esté completamente hecho y córtalo en tiras.','Lava la lechuga; corta la manzana y pela la naranja en gajos.','Mezcla todo y sirve con el jugo de naranja como aliño.'],
+  'Quinoa con garbanzos y mango':['Enjuaga y cocina la quinoa; déjala entibiar.','Enjuaga los garbanzos y corta el mango y el pepino en cubos.','Mezcla todo y aliña con limón y aceite.'],
+  'Ensalada de espinaca, frutilla y ricota':['Lava y seca bien la espinaca y las frutillas.','Corta las frutillas y distribúyelas sobre la espinaca.','Añade la ricota y las nueces; sirve con limón.'],
+  'Ensalada de frutas de estación':['Lava la fruta; pela la naranja, el kiwi y la banana.','Corta manzana, banana, naranja, kiwi y uvas en trozos pequeños.','Mezcla con cuidado y sirve fría.'],
+  'Brochetas de frutilla, uvas y ananá':['Lava las frutillas y las uvas; corta el ananá en cubos.','Ensarta la fruta alternando los colores en palitos.','Sirve con yogur natural al lado.'],
+  'Licuado de durazno, banana y leche':['Lava el durazno, retira el carozo y pela la banana.','Licúa ambas frutas con la leche hasta que quede homogéneo.','Sirve frío.'],
+  'Pollo al horno con manzana y batata':['Calienta el horno a 200 °C y corta la batata, la cebolla y la manzana.','Coloca todo en una fuente con el pollo, aceite y condimentos.','Hornea hasta que la batata esté tierna y el pollo completamente cocido.'],
+  'Pescado con naranja y arroz':['Cocina el arroz y reserva.','Cocina el pescado en una sartén hasta que esté opaco; añade gajos de naranja al final.','Sirve el pescado con el arroz y un poco del jugo de la sartén.'],
+  'Tofu salteado con ananá y morrón':['Dora el tofu en cubos en una sartén caliente.','Añade el morrón en tiras y cocina hasta que se ablande.','Agrega el ananá en cubos y sirve el salteado sobre arroz.'],
+  'Jugo de naranja recién exprimido':['Lava las naranjas y córtalas al medio.','Exprime el jugo a mano o con exprimidor.','Sirve enseguida; cuélalo solo si prefieres quitar la pulpa.'],
+  'Limonada casera sin azúcar':['Lava y exprime los limones.','Mezcla el jugo con agua fría y prueba hasta alcanzar la intensidad que te guste.','Sirve con hielo; no necesita azúcar.'],
+  'Jugo de naranja y zanahoria':['Lava y pela la zanahoria; exprime las naranjas y el limón.','Licúa el jugo cítrico con la zanahoria y un poco de agua fría.','Cuela si lo prefieres liviano y sirve enseguida.'],
+  'Licuado de mango y naranja':['Pela el mango y exprime la naranja.','Licúa la fruta con el yogur hasta que quede cremosa.','Sirve frío, sin agregar azúcar.'],
+  'Jugo de mandarina y naranja':['Lava las mandarinas y las naranjas.','Exprime ambas frutas y mezcla los jugos.','Sirve frío; puedes colarlo si quieres menos pulpa.'],
+  'Jugo de pomelo y naranja':['Corta el pomelo y la naranja al medio y exprime ambas frutas.','Mezcla los jugos y prueba el sabor.','Si queda muy intenso, diluye con un poco de agua fría.'],
+  'Agua fresca de sandía y lima':['Retira la cáscara y las semillas de la sandía.','Licúa la pulpa con el jugo de lima y agua fría.','Cuela si lo deseas y sirve con hielo.'],
+  'Licuado de ananá y naranja':['Pela el ananá y córtalo en cubos; exprime la naranja.','Licúa la fruta con el yogur hasta que quede homogéneo.','Sirve enseguida, sin azúcar agregada.'],
+  'Limonada de frutilla':['Lava y quita las hojas de las frutillas; exprime el limón.','Licúa las frutillas con el jugo de limón y agua fría.','Cuela si quieres y sirve con hielo.'],
+  'Milanesa vacuna al horno con puré':['Pasa la carne por huevo batido y luego por pan rallado, presionando para que se adhiera.','Coloca las milanesas en una fuente con una capa fina de aceite y hornéalas a 200 °C; dales vuelta una vez.','Hierve las papas, písalas y mezcla con un poco de leche; sirve con la milanesa.'],
+  'Milanesa napolitana al horno':['Pasa la carne por huevo batido y pan rallado.','Hornea a 200 °C en una fuente apenas aceitada, dándola vuelta hasta que quede cocida y dorada.','Agrega tomate y queso por encima y gratina unos minutos.'],
+  'Chivito al plato liviano':['Hornea las papas en cubos con poco aceite hasta que estén doradas y tiernas.','Cocina el bife magro a la plancha y el huevo en una sartén antiadherente.','Sirve con una porción moderada de queso, tomate y lechuga.'],
+  'Carne vacuna a la olla con verduras':['Dora la carne en una olla con poco aceite.','Agrega cebolla, zanahoria, papa y agua hasta cubrir parcialmente.','Tapa y cocina a fuego bajo hasta que la carne y las verduras estén tiernas.'],
+  'Bife a caballo con papas al horno':['Corta las papas en gajos, condimenta y hornéalas hasta que estén tiernas y doradas.','Cocina el bife magro a la plancha.','Cocina el huevo en una sartén antiadherente y sírvelo sobre el bife.'],
+  'Milanesa de cerdo al horno con ensalada':['Pasa las fetas de cerdo por huevo batido y luego por pan rallado.','Colócalas en una fuente apenas aceitada y hornéalas, dándolas vuelta, hasta que estén doradas y completamente cocidas.','Sirve con tomate, lechuga y limón.'],
+  'Bondiola de cerdo a la plancha con calabaza':['Corta la calabaza y la cebolla; hornéalas con poco aceite hasta que estén tiernas.','Retira la grasa visible del cerdo y cocínalo a la plancha por ambos lados.','Comprueba que esté completamente cocido y sirve con las verduras.'],
+  'Pastel de carne vacuna y papa al horno':['Hierve las papas hasta que estén tiernas y prepara un puré con un poco de leche.','Saltea la cebolla y agrega la carne picada magra; cocina hasta que esté completamente hecha.','Pon la carne en una fuente, cubre con puré y hornea hasta dorar.'],
+  'Cerdo al horno con manzana y batata':['Calienta el horno a 200 °C y corta la batata, la cebolla y la manzana.','Coloca el cerdo magro y las verduras en una fuente con poco aceite.','Hornea hasta que la batata esté tierna y el cerdo completamente cocido.'],
+  'Café negro':['Calienta agua y coloca el café molido en filtro o cafetera.','Vierte el agua caliente y deja que el café pase.','Sirve sin azúcar agregada.'],
+  'Café con leche':['Prepara el café con el método que tengas en casa.','Calienta la leche sin dejar que hierva.','Mezcla o sirve el café con la leche caliente.'],
+  'Té caliente':['Calienta agua hasta antes del hervor.','Vierte sobre el té y deja reposar de 3 a 5 minutos.','Retira el saquito o las hojas y sirve.'],
+  'Mate tradicional':['Llena el mate hasta unos dos tercios con yerba y tapa la boca con la mano.','Inclínalo para acomodar la yerba a un lado y coloca la bombilla.','Agrega agua caliente, sin hervir, poco a poco junto a la bombilla.'],
+  'Mate cocido':['Calienta agua en una olla y agrega la yerba mate o colócala en un infusor.','Deja infusionar unos minutos sin hervir la yerba.','Cuela y sirve en una taza.'],
+  'Cacao caliente con leche':['Calienta la leche a fuego bajo.','Disuelve el cacao en un poco de leche tibia y mézclalo con el resto.','Sirve sin azúcar añadida; puedes espolvorear canela.'],
+  'Tostadas integrales con ricota y frambuesas':['Tuesta el pan integral hasta que quede apenas dorado.','Unta la ricota sobre las tostadas.','Añade las frambuesas lavadas y sirve.'],
+  'Avena con papaya y yogur':['Calienta la avena con agua o leche, revolviendo hasta que esté cremosa.','Corta la papaya en cubos pequeños.','Sirve la avena con papaya y yogur natural por encima.'],
+  'Frittata al horno de espinaca y ricota':['Calienta el horno a 180 °C y saltea la espinaca hasta que se ablande.','Bate los huevos y mézclalos con la espinaca y la ricota.','Vierte en una fuente pequeña y hornea hasta que el centro esté firme.'],
+  'Polenta con tuco de carne magra':['Dora la carne picada en una sartén con la cebolla picada.','Agrega el tomate y cocina el tuco a fuego bajo hasta que la carne esté completamente cocida.','Prepara la polenta siguiendo el envase y sirve con el tuco encima.'],
+  'Berenjena al horno rellena de lentejas':['Corta las berenjenas al medio y hornéalas hasta que empiecen a ablandarse.','Cocina las lentejas; mezcla con tomate picado y parte de la pulpa de berenjena.','Rellena las mitades, agrega queso y hornea hasta que gratine.'],
+  'Ensalada tibia de remolacha, papa y huevo':['Lava y cocina la remolacha y la papa hasta que estén tiernas; deja entibiar.','Hierve los huevos hasta que estén duros, enfría y corta.','Pela y corta los vegetales; sirve con huevo y limón.'],
+  'Cuscús con garbanzos, pepino y tomate':['Coloca el cuscús en un bol y cúbrelo con agua caliente según las indicaciones del envase.','Deja reposar tapado y luego separa los granos con un tenedor.','Añade garbanzos, pepino y tomate en cubos; aliña con limón y aceite.'],
+  'Tarta de puerro y ricota':['Precalienta el horno a 180 °C y coloca la masa en una tartera.','Lava y corta el puerro; saltéalo hasta que quede tierno y mézclalo con ricota y huevo.','Rellena la masa y hornea hasta que el centro cuaje y la superficie se dore.'],
+  'Yogur con papaya y semillas':['Lava y corta la papaya en cubos.','Coloca el yogur natural en un bol.','Añade la papaya y las semillas justo antes de servir.'],
+  'Licuado de frambuesa, banana y yogur':['Lava las frambuesas y pela la banana.','Licúa ambas frutas con el yogur hasta que quede homogéneo.','Sirve frío, sin añadir azúcar.'],
+  'Cerdo a la sartén con repollo morado y manzana':['Retira la grasa visible y corta el cerdo en tiras finas.','Cocínalo en una sartén caliente hasta que esté completamente hecho; retira y reserva.','Saltea el repollo y la manzana en la misma sartén, vuelve a incorporar el cerdo y sirve.'],
+  'Milanesa de berenjena al horno con ensalada':['Corta la berenjena en rodajas y pásalas por huevo batido y pan rallado.','Colócalas en una fuente apenas aceitada y hornéalas a 200 °C hasta que estén doradas; dales vuelta una vez.','Sirve con tomate y lechuga lavados y cortados.'],
+  'Zapallitos rellenos de carne magra':['Corta los zapallitos al medio y cocínalos unos minutos hasta que se ablanden; retira parte de la pulpa.','Saltea la carne picada con cebolla y tomate hasta que esté completamente cocida.','Rellena los zapallitos y hornea hasta que estén tiernos.'],
+  'Salmón al horno con hinojo y naranja':['Calienta el horno a 190 °C y corta el hinojo en láminas finas.','Pon el salmón en una fuente con hinojo, naranja, aceite y pimienta.','Hornea hasta que el pescado esté opaco y se desmenuce fácilmente.'],
+  'Pollo al horno con mandioca y limón':['Pela la mandioca, retira la fibra central y córtala en trozos; hiérvela hasta que esté apenas tierna y escúrrela.','Coloca el pollo y la mandioca en una fuente con limón, ajo y poco aceite.','Hornea hasta que la mandioca esté dorada y el pollo completamente cocido.'],
+  'Ensalada de cuscús, remolacha y garbanzos':['Lava y hornea la remolacha envuelta en papel hasta que esté tierna; luego pélala y córtala.','Hidrata el cuscús con agua caliente y sepáralo con un tenedor.','Mezcla con garbanzos y remolacha; termina con limón.'],
+  'Licuado de papaya y naranja':['Pela la papaya y córtala en cubos; exprime la naranja.','Licúa la fruta con un poco de agua fría hasta que quede suave.','Sirve enseguida, sin azúcar añadida.']
+};
+
+
+
+const defaults=['huevos','arroz','tomate','espinaca'];
+let pantry=load('quehay-pantry',defaults);
+let selected=load('quehay-meal','almuerzo');
+let favorites=load('quehay-favorites',[]);
+let shopping=load('quehay-shopping',[]);
+let weeklyPlan=load('quehay-weekly-plan',{});
+let completedDays=load('quehay-completed-days',[]);
+let rejectedAddOns=load('quehay-rejected-addons',{});
+let servings=load('quehay-servings',2);
+let maxCookTime=Number(load('quehay-max-cook-time',0))||0;
+let dietaryPreferences=load('quehay-dietary-preferences',{vegetarian:false,allergens:[]});
+let activeView='today';
+let cookingRecipe='';
+let cookingStep=0;
+let pairedDrinks={};
+
+function load(key,fallback){
+  try{
+    const value=localStorage.getItem(key);
+    return value?JSON.parse(value):fallback;
+  }catch{
+    return fallback;
+  }
+}
+
+function save(){
+  try{
+    localStorage.setItem('quehay-pantry',JSON.stringify(pantry));
+    localStorage.setItem('quehay-meal',JSON.stringify(selected));
+    localStorage.setItem('quehay-favorites',JSON.stringify(favorites));
+    localStorage.setItem('quehay-shopping',JSON.stringify(shopping));
+    localStorage.setItem('quehay-weekly-plan',JSON.stringify(weeklyPlan));
+    localStorage.setItem('quehay-completed-days',JSON.stringify(completedDays));
+    localStorage.setItem('quehay-rejected-addons',JSON.stringify(rejectedAddOns));
+    localStorage.setItem('quehay-servings',JSON.stringify(servings));
+    localStorage.setItem('quehay-max-cook-time',JSON.stringify(maxCookTime));
+    localStorage.setItem('quehay-dietary-preferences',JSON.stringify(dietaryPreferences));
+  }catch{}
+}
+
+function normalized(value){
+  return String(value).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+}
+
+function normalizedWords(value){
+  return normalized(value).replace(/[^a-z0-9]+/g,' ').trim();
+}
+
+function containsWholeIngredient(item,ingredient){
+  const itemWords=` ${normalizedWords(item)} `;
+  const ingredientWords=` ${normalizedWords(ingredient)} `;
+  return itemWords.includes(ingredientWords);
+}
+
+function matchesIngredient(recipe,ingredient,item){
+  const aliases=(recipe.keys&&recipe.keys[ingredient])||ingredientAliases[ingredient]||[ingredient];
+  return aliases.some(alias=>containsWholeIngredient(item,alias));
+}
+
+const ingredientSubstitutions={
+  espinaca:['acelga'],acelga:['espinaca'],
+  brocoli:['coliflor'],coliflor:['brocoli'],
+  arroz:['quinoa'],quinoa:['arroz'],
+  papa:['batata'],batata:['papa'],
+  naranja:['mandarina'],mandarina:['naranja'],
+  frutilla:['arandanos'],arandanos:['frutilla']
+};
+
+const recipeSubstitutions={
+  'Milanesa vacuna al horno con puré':{'carne vacuna':['cerdo']},
+  'Milanesa napolitana al horno':{'carne vacuna':['cerdo']},
+  'Milanesa de cerdo al horno con ensalada':{cerdo:['carne vacuna']}
+};
+
+function findIngredientSubstitute(recipe,ingredient){
+  const specific=(recipeSubstitutions[recipe.name]||{})[ingredient];
+  const key=Object.keys(ingredientSubstitutions).find(name=>
+    normalizedWords(name)===normalizedWords(ingredient)
+  );
+  const options=specific||ingredientSubstitutions[key]||[];
+  return pantry.find(item=>
+    options.some(option=>matchesIngredient(recipe,option,item))&&
+    !(dietaryPreferences.allergens||[]).some(allergen=>ingredientHasAllergen(item,allergen))
+  )||'';
+}
+
+function isRejectedAddOn(item,recipe){
+  return (rejectedAddOns[recipe.name]||[]).includes(normalizedWords(item));
+}
+
+const allergenIngredients={
+  peanuts:['mani','maní','cacahuate','cacahuete','nuez','nueces','almendra','almendras','crema de mani','mantequilla de mani'],
+  dairy:['leche','yogur','yogurt','queso','ricota'],
+  eggs:['huevo','huevos'],
+  fish:['atun','atún','pescado','salmon','salmón','merluza'],
+  gluten:['pan','pan integral','tostada','tostadas','pasta','fideos','harina','trigo','galleta','galletas','crackers','masa','tortilla de harina','cuscus','couscous'],
+  soy:['tofu','soja','salsa de soja','miso','edamame']
+};
+
+function ingredientHasAllergen(ingredient,allergen){
+  return (allergenIngredients[allergen]||[]).some(term=>
+    containsWholeIngredient(ingredient,term)
+  );
+}
+
+function recipeAllowed(recipe){
+  if(dietaryPreferences.vegetarian){
+    const meats=['pollo','carne','carne vacuna','carne picada magra','cerdo','atun','atún','pescado','salmon','salmón','pavo','jamon','jamón'];
+    if(recipe.ingredients.some(ingredient=>
+      meats.some(meat=>normalizedWords(ingredient)===normalizedWords(meat))
+    ))return false;
+  }
+
+  return !(dietaryPreferences.allergens||[]).some(allergen=>
+    recipe.ingredients.some(ingredient=>ingredientHasAllergen(ingredient,allergen))
+  );
+}
+
+function renderDietaryControls(){
+  const vegetarian=document.querySelector('[data-diet="vegetarian"]');
+  if(vegetarian)vegetarian.checked=Boolean(dietaryPreferences.vegetarian);
+  document.querySelectorAll('[data-allergen]').forEach(input=>{
+    input.checked=(dietaryPreferences.allergens||[]).includes(input.dataset.allergen);
+  });
+}
+
+function renderRejectedAddOns(recipe){
+  const rejected=rejectedAddOns[recipe.name]||[];
+  if(!rejected.length)return '';
+
+  return `<section>
+    <h3>Sugerencias ocultas</h3>
+    <ul class="addon-list">
+      ${rejected.map(itemKey=>{
+        const label=pantry.find(item=>normalizedWords(item)===itemKey)||itemKey;
+        return `<li>
+          <span>${escapeHtml(label)}</span>
+          <button class="reject-button" type="button"
+            data-restore-recipe="${escapeHtml(recipe.name)}"
+            data-restore-item="${escapeHtml(itemKey)}">Restaurar</button>
+        </li>`;
+      }).join('')}
+    </ul>
+  </section>`;
+}
+
+function ingredientAmountFor(ingredient){
+  const key=Object.keys(ingredientAmounts).find(name=>
+    normalizedWords(name)===normalizedWords(ingredient)
+  );
+  const amount=ingredientAmounts[key||ingredient];
+  if(!amount)return null;
+  const value=amount.amount*servings/2;
+  return {quantity:Number.isInteger(value)?value:Number(value.toFixed(1)),unit:amount.unit};
+}
+
+function formatIngredientAmount(quantity,unit){
+  const display=Number.isInteger(quantity)?quantity:Number(quantity.toFixed(1));
+  const forms={
+    unidad:['unidad','unidades'],unidades:['unidad','unidades'],
+    rebanada:['rebanada','rebanadas'],rebanadas:['rebanada','rebanadas'],
+    tapa:['tapa','tapas'],tapas:['tapa','tapas'],
+    saquito:['saquito','saquitos'],saquitos:['saquito','saquitos']
+  };
+  const pair=forms[unit];
+  return `${display} ${pair?(display===1?pair[0]:pair[1]):unit}`;
+}
+
+function ingredientQuantity(ingredient){
+  const amount=ingredientAmountFor(ingredient);
+  return amount?formatIngredientAmount(amount.quantity,amount.unit):'a gusto';
+}
+
+function addRecipeIngredientToShopping(ingredient){
+  const amount=ingredientAmountFor(ingredient);
+  const existing=shopping.find(item=>
+    normalizedWords(item.ingredient||item.name)===normalizedWords(ingredient)
+  );
+
+  if(existing){
+    if(amount&&existing.quantity!=null&&existing.unit===amount.unit){
+      existing.quantity=Number((existing.quantity+amount.quantity).toFixed(1));
+      existing.name=`${formatIngredientAmount(existing.quantity,existing.unit)} de ${ingredient}`;
+    }
+    return;
+  }
+
+  shopping.push({
+    name:amount?`${formatIngredientAmount(amount.quantity,amount.unit)} de ${ingredient}`:ingredient,
+    ingredient,
+    quantity:amount?.quantity,
+    unit:amount?.unit,
+    checked:false
+  });
+}
+
+function preparationSteps(recipe){
+  return recipeSteps[recipe.name]||[
+    'Prepara y corta los ingredientes de la receta.',
+    'Cocínalos siguiendo el orden indicado en la lista de ingredientes.',
+    'Prueba y ajusta los condimentos antes de servir.'
+  ];
+}
+
+function cookingMethod(recipe){
+  const name=normalizedWords(recipe.name);
+  const steps=normalizedWords(preparationSteps(recipe).join(' '));
+  if(recipe.category==='drink'&&/(cafe|te caliente|mate|mate cocido|cacao caliente)/.test(name))return '☕ Bebida caliente';
+  if(recipe.category==='drink')return '🥣 Sin cocción';
+  const oven=/hornea|hornear|horno|gratina|gratinar|asa la|asala|asado|fuente al horno/.test(steps+' '+name);
+  const pan=/sarten|saltea|saltear|dora el tofu|dora la|da vuelta|fuego bajo|revuelve en/.test(steps+' '+name);
+  const pot=/hierve|hervir|olla|sopa|guiso|guisar|cocina el arroz|cocina las lentejas|cocina la quinoa|agua con sal|cocina la remolacha/.test(steps+' '+name);
+  const toasted=/tuesta|tostar|tuesta el pan/.test(steps);
+  const heated=oven||pan||pot||toasted||/calienta la avena|cocina la avena|herv/.test(steps);
+  if(/cuscus/.test(name)&&!oven&&!pan&&!pot)return '💧 Hidratado';
+  if(/avena/.test(name)&&heated)return '🥘 A la olla';
+  if(/polenta/.test(name)&&pan)return '🍳 Preparación mixta';
+  if(oven&&(pan||pot))return '🍳 Preparación mixta';
+  if(oven)return '🔥 Al horno';
+  if(pan)return '🍳 A la sartén';
+  if(pot)return '🥘 A la olla';
+  if(toasted)return '🍞 Tostado';
+  if(!heated&&/(ensalada|yogur|pudin|pudding|licuado|jugo|limonada|agua fresca|brochetas|tostada|hummus|fruta fresca)/.test(name))return '🥣 Sin cocción';
+  return '🍳 A la sartén';
+}
+
+function complementKind(item,recipe){
+  if(isRejectedAddOn(item,recipe))return '';
+  if((dietaryPreferences.allergens||[]).some(allergen=>ingredientHasAllergen(item,allergen)))return '';
+  const allowed=recipeAddOns[recipe.name]||[];
+  return allowed.some(ingredient=>{
+    const aliases=ingredientAliases[ingredient]||[ingredient];
+    return aliases.some(alias=>containsWholeIngredient(item,alias));
+  })?'extra opcional compatible':'';
+}
+
+function escapeHtml(value){
+  return String(value).replace(/[&<>"']/g,character=>({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  })[character]);
+}
+
+function renderMeals(){
+  document.querySelector('#meals').innerHTML=meals.map(([id,emoji,name,sub])=>
+    `<button type="button" class="meal" aria-pressed="${selected===id}" data-meal="${id}">
+      <span class="emoji">${emoji}</span>${name}<small>${sub}</small>
+    </button>`
+  ).join('');
+
+  document.querySelectorAll('[data-meal]').forEach(button=>
+    button.addEventListener('click',()=>{
+      selected=button.dataset.meal;
+      save();
+      render();
+    })
+  );
+}
+
+function renderChips(){
+  const box=document.querySelector('#chips');
+  box.innerHTML=pantry.map((item,index)=>
+    `<span class="chip">${escapeHtml(item)}
+      <button type="button" aria-label="Quitar ${escapeHtml(item)}" data-remove="${index}">×</button>
+    </span>`
+  ).join('');
+
+  if(!pantry.length){
+    box.innerHTML='<p class="empty">Todavía no agregaste ingredientes. Prueba con algo que tengas en casa.</p>';
+  }
+
+  box.querySelectorAll('[data-remove]').forEach(button=>
+    button.addEventListener('click',()=>{
+      pantry.splice(Number(button.dataset.remove),1);
+      save();
+      render();
+    })
+  );
+}
+
+function recipeMatchesSearch(recipe,query){
+  const terms=[
+    recipe.name,
+    recipe.desc,
+    ...recipe.ingredients,
+    ...recipe.ingredients.flatMap(ingredient=>
+      (recipe.keys&&recipe.keys[ingredient])||ingredientAliases[ingredient]||[]
+    )
+  ];
+  const searchable=normalizedWords(terms.join(' '));
+  return normalizedWords(query).split(' ').filter(Boolean)
+    .every(term=>searchable.includes(term));
+}
+
+function renderCookingCard(recipe){
+  const steps=preparationSteps(recipe);
+  const step=Math.min(cookingStep,steps.length-1);
+  const progress=((step+1)/steps.length)*100;
+  return `<section class="cooking-card" aria-label="Preparación paso a paso">
+    <div class="cooking-header">
+      <span class="cooking-count">Paso ${step+1} de ${steps.length}</span>
+      <button type="button" class="cooking-close" data-close-cooking>Cerrar</button>
+    </div>
+    <div class="cooking-progress" role="progressbar" aria-label="Progreso de la receta" aria-valuemin="1" aria-valuemax="${steps.length}" aria-valuenow="${step+1}">
+      <span style="width:${progress}%"></span>
+    </div>
+    <p class="cooking-step" aria-live="polite">${escapeHtml(steps[step])}</p>
+    <div class="cooking-controls">
+      <button type="button" data-cooking-prev ${step===0?'disabled':''}>← Anterior</button>
+      <button type="button" data-cooking-next>${step===steps.length-1?'Terminar':'Siguiente →'}</button>
+    </div>
+  </section>`;
+}
+
+function renderDrinkPairing(recipe){
+  const available=recipes.filter(drink=>
+    drink.category==='drink'&&recipeAllowed(drink)&&drink.ingredients.every(ingredient=>
+      pantry.some(item=>matchesIngredient(drink,ingredient,item))
+    )
+  );
+  const pairedName=pairedDrinks[recipe.name];
+  const paired=available.find(drink=>drink.name===pairedName);
+  if(pairedName&&!paired)delete pairedDrinks[recipe.name];
+  if(!available.length)return '';
+
+  return `<section class="drink-pairing" data-drink-pairing>
+    <h3>🥤 Bebida para acompañar</h3>
+    <div class="drink-pairing-controls">
+      <select aria-label="Elegir bebida para sumar a la comida">
+        ${available.map(drink=>`<option value="${escapeHtml(drink.name)}" ${drink.name===pairedName?'selected':''}>${escapeHtml(drink.name)}</option>`).join('')}
+      </select>
+      <button type="button" data-pair-drink="${escapeHtml(recipe.name)}">${paired?'Cambiar bebida':'Sumar a esta comida'}</button>
+    </div>
+    ${paired?`<p>Agregaste <strong>${escapeHtml(paired.name)}</strong> para acompañar esta receta.</p>
+      <div class="recipe-actions">
+        <button type="button" data-start-cooking="${escapeHtml(paired.name)}">Preparar bebida</button>
+        <button type="button" data-remove-paired-drink="${escapeHtml(recipe.name)}">Quitar bebida</button>
+      </div>
+      ${cookingRecipe===paired.name?renderCookingCard(paired):''}`:''}
+  </section>`;
+}
+
+function renderResult(){
+  const query=document.querySelector('#recipe-search')?.value||'';
+  const recipesForMeal=recipes.filter(recipe=>
+    recipe.meal===selected&&recipe.category!=='drink'&&
+    (!maxCookTime||recipe.time<=maxCookTime)&&recipeMatchesSearch(recipe,query)
+  );
+  const all=recipesForMeal.filter(recipe=>recipeAllowed(recipe)).map(recipe=>{
+    const have=recipe.ingredients.filter(ingredient=>
+      pantry.some(item=>matchesIngredient(recipe,ingredient,item))
+    );
+    const missingExact=recipe.ingredients.filter(ingredient=>!have.includes(ingredient));
+    const substitutions=Object.fromEntries(missingExact.map(ingredient=>
+      [ingredient,findIngredientSubstitute(recipe,ingredient)]
+    ).filter(([,substitute])=>Boolean(substitute)));
+    const missing=missingExact.filter(ingredient=>!substitutions[ingredient]);
+    const unmatched=pantry.filter(item=>
+      !recipe.ingredients.some(ingredient=>matchesIngredient(recipe,ingredient,item))&&
+      !recipe.ingredients.some(ingredient=>findIngredientSubstitute(recipe,ingredient)===item)
+    );
+    const addOns=unmatched
+      .map(item=>({item,kind:complementKind(item,recipe)}))
+      .filter(entry=>entry.kind);
+    const unused=unmatched.filter(item=>
+      !isRejectedAddOn(item,recipe)&&!addOns.some(entry=>entry.item===item)
+    );
+
+    return{recipe,have,missing,substitutions,addOns,unused,coverage:(have.length+Object.keys(substitutions).length)/recipe.ingredients.length};
+  });
+
+  const eligible=pantry.length?all.filter(item=>item.have.length+Object.keys(item.substitutions).length>0):all;
+  eligible.sort((a,b)=>
+    b.coverage-a.coverage||
+    b.have.length-a.have.length||
+    b.addOns.length-a.addOns.length||
+    b.recipe.protein-a.recipe.protein
+  );
+
+  const solid=eligible.filter(item=>item.have.length+Object.keys(item.substitutions).length>=2);
+  const lowMatch=pantry.length>0&&solid.length===0;
+  const picks=lowMatch?eligible.slice(0,1):(solid.length?solid:eligible).slice(0,3);
+  const mealName=meals.find(meal=>meal[0]===selected)[2];
+
+  document.querySelector('#result-summary').textContent=(pantry.length
+    ?lowMatch?`${mealName} · coincidencia parcial`:`${mealName} · ${picks.length} ideas con buena coincidencia`
+    :`${mealName} · ideas generales`)+(maxCookTime?` · hasta ${maxCookTime} min`:'');
+
+  if(!picks.length){
+    const hasAllowedRecipe=recipesForMeal.some(recipe=>recipeAllowed(recipe));
+    const hasRecipesOverTime=maxCookTime&&recipes.some(recipe=>
+      recipe.meal===selected&&recipe.category!=='drink'&&recipe.time>maxCookTime&&
+      recipeAllowed(recipe)&&recipeMatchesSearch(recipe,query)
+    );
+    const listed=pantry.map(escapeHtml).join(', ');
+    document.querySelector('#result').innerHTML=query
+      ?'<article class="recipe"><h2>No encontré esa receta</h2><p>Prueba con otro nombre o ingrediente, o borra la búsqueda.</p></article>'
+      :hasRecipesOverTime
+        ?'<article class="recipe"><h2>No hay ideas dentro de ese tiempo</h2><p>Prueba elegir un límite mayor para ver más recetas.</p></article>'
+      :hasAllowedRecipe
+        ?`<article class="recipe"><h2>Agrega un ingrediente principal</h2>
+          <p>Veo ${listed}. Todavía no tengo una receta base para esos ingredientes; agrega un alimento principal y buscaré combinaciones.</p></article>`
+        :'<article class="recipe"><h2>No hay recetas con estos filtros</h2><p>Prueba cambiar alguna preferencia para ver más ideas.</p></article>';
+    return;
+  }
+
+  document.querySelector('#result').innerHTML=picks.map(({recipe,have,missing,substitutions,addOns,unused},index)=>{
+    const need=missing.length
+      ?`<ul>${missing.map(item=>`<li>${ingredientQuantity(item)} de ${escapeHtml(item)}</li>`).join('')}</ul>`
+      :Object.keys(substitutions).length
+        ?'<p>Tienes los ingredientes base o reemplazos compatibles.</p>'
+        :'<p>Tienes todos los ingredientes de la receta base.</p>';
+
+    const substitutionText=Object.entries(substitutions).length
+      ?`<section class="substitution-card"><h3>🔄 Reemplazos que sí tienes</h3><ul>
+          ${Object.entries(substitutions).map(([ingredient,substitute])=>
+            `<li>Usa ${escapeHtml(substitute)} en lugar de ${escapeHtml(ingredient)}.</li>`
+          ).join('')}
+        </ul></section>`
+      :'';
+
+    const stock=have.length
+      ?`<p>Tienes: ${have.map(escapeHtml).join(', ')}.</p>`
+      :Object.keys(substitutions).length
+        ?'<p>Tienes un reemplazo compatible para esta receta.</p>'
+        :'<p>Una idea general para cuando todavía no cargaste ingredientes.</p>';
+
+    const addOnText=addOns.length
+      ?`<section><h3>➕ Puedes agregar al plato</h3><ul class="addon-list">
+          ${addOns.map(entry=>`<li>
+            <span>${escapeHtml(entry.item)} (${escapeHtml(entry.kind)})</span>
+            <button class="reject-button" type="button"
+              data-reject-recipe="${escapeHtml(recipe.name)}"
+              data-reject-item="${escapeHtml(entry.item)}">No combina</button>
+          </li>`).join('')}
+        </ul></section>`
+      :'';
+
+    const restoreText=renderRejectedAddOns(recipe);
+    const unusedText=unused.length
+      ?`<p class="note">No se incorpora a esta idea: ${unused.map(escapeHtml).join(', ')}. Puedes guardarlo para otra comida.</p>`
+      :'';
+    const general=!pantry.length
+      ?'<p class="note">Agrega lo que tengas y adaptaré estas sugerencias a tu cocina.</p>'
+      :'';
+    const title=index===0?(lowMatch?'Idea para adaptar: ':'Mejor coincidencia: '):'';
+    const matchLabel=lowMatch
+      ?'Coincidencia parcial'
+      :Object.keys(substitutions).length
+        ?`${have.length}/${recipe.ingredients.length} base · ${Object.keys(substitutions).length} reemplazo(s)`
+        :`${have.length}/${recipe.ingredients.length} ingredientes base`;
+
+    const ingredientList=recipe.ingredients.map(item=>
+      `<li>${ingredientQuantity(item)} de ${escapeHtml(item)}</li>`
+    ).join('');
+    const planDays=getCurrentWeekDays();
+    const firstFreeDay=planDays.find(({key})=>!weeklyPlan[key]?.[recipe.meal])||planDays[0];
+    const planDayOptions=planDays.map(({date,key})=>
+      `<option value="${key}" ${key===firstFreeDay.key?'selected':''}>${escapeHtml(new Intl.DateTimeFormat('es-UY',{weekday:'long',day:'numeric',month:'short'}).format(date))}${weeklyPlan[key]?.[recipe.meal]?' · ocupado':''}</option>`
+    ).join('');
+
+    return `<article class="recipe" style="margin-bottom:12px">
+      <div class="recipe-top"><div>
+        <h2>${title}${escapeHtml(recipe.name)}</h2>
+        <p>${escapeHtml(recipe.desc)}</p>
+        ${recipe.noAddedSugar?'<span class="no-sugar">Sin azúcar añadida</span>':''}
+      </div><span class="match">${matchLabel}</span></div>
+
+      <div class="facts">
+        <span class="fact"><strong>≈ ${recipe.protein} g</strong> proteína / porción base</span>
+        <span class="fact"><strong>${recipe.time} min</strong> aprox.</span>
+        <span class="method-tag">${cookingMethod(recipe)}</span>
+      </div>
+
+      <div class="recipe-details">
+        <h3>Ingredientes para ${servings} porciones</h3>
+        <ul>${ingredientList}</ul>
+      </div>
+
+      <div class="availability">
+        <section><h3>✅ Ya tienes</h3>${stock}</section>
+        <section><h3>🛒 Necesitas para la receta</h3>${need}</section>
+        ${addOnText}
+        ${restoreText}
+      </div>
+
+      ${substitutionText}
+      ${unusedText}
+      ${renderDrinkPairing(recipe)}
+      <p class="buy-note" style="margin:12px 0 0;padding:10px 12px;border-radius:12px;background:#F5ECEA;font-size:.88rem">
+        ${(dietaryPreferences.allergens||[]).length?'':`<strong>Extra opcional:</strong> ${escapeHtml(recipe.boost)}`}
+      </p>
+      <div class="recipe-actions">
+        <button type="button" data-favorite="${escapeHtml(recipe.name)}">${favorites.includes(recipe.name)?'★ Guardada':'☆ Guardar favorita'}</button>
+        ${missing.length?`<button type="button" data-add-missing="${escapeHtml(recipe.name)}">Agregar faltantes a compras</button>`:''}
+        <button type="button" data-start-cooking="${escapeHtml(recipe.name)}">${cookingRecipe===recipe.name?'Reiniciar pasos':'Preparar'}</button>
+      </div>
+      <details class="plan-from-recipe">
+        <summary>＋ Agregar al plan</summary>
+        <div class="plan-from-recipe-controls">
+          <label>Elegir día
+            <select data-plan-day-choice="${escapeHtml(recipe.name)}">${planDayOptions}</select>
+          </label>
+          <button type="button" data-save-plan-recipe="${escapeHtml(recipe.name)}">Guardar</button>
+        </div>
+        <span class="plan-feedback" data-plan-feedback="${escapeHtml(recipe.name)}" aria-live="polite"></span>
+      </details>
+      ${cookingRecipe===recipe.name?renderCookingCard(recipe):''}
+      ${general}
+    </article>`;
+  }).join('')+
+  '<p class="note">Las cantidades de ingredientes y proteína son aproximadas. Las sugerencias priorizan lo que ya tienes.</p>';
+
+  document.querySelectorAll('[data-reject-recipe]').forEach(button=>
+    button.addEventListener('click',()=>{
+      const recipeName=button.dataset.rejectRecipe;
+      const itemKey=normalizedWords(button.dataset.rejectItem);
+      if(!rejectedAddOns[recipeName])rejectedAddOns[recipeName]=[];
+      if(!rejectedAddOns[recipeName].includes(itemKey)){
+        rejectedAddOns[recipeName].push(itemKey);
+      }
+      save();
+      render();
+    })
+  );
+
+  document.querySelectorAll('[data-restore-recipe]').forEach(button=>
+    button.addEventListener('click',()=>{
+      const recipeName=button.dataset.restoreRecipe;
+      const itemKey=button.dataset.restoreItem;
+      rejectedAddOns[recipeName]=(rejectedAddOns[recipeName]||[])
+        .filter(item=>item!==itemKey);
+      if(!rejectedAddOns[recipeName].length)delete rejectedAddOns[recipeName];
+      save();
+      render();
+    })
+  );
+
+  document.querySelectorAll('[data-favorite]').forEach(button=>
+    button.addEventListener('click',()=>{
+      const name=button.dataset.favorite;
+      favorites=favorites.includes(name)
+        ?favorites.filter(item=>item!==name)
+        :[...favorites,name];
+      save();
+      render();
+    })
+  );
+
+  document.querySelectorAll('[data-add-missing]').forEach(button=>
+    button.addEventListener('click',()=>{
+      const recipe=recipes.find(item=>item.name===button.dataset.addMissing);
+      if(!recipe)return;
+
+      const missing=recipe.ingredients.filter(ingredient=>
+        !pantry.some(item=>matchesIngredient(recipe,ingredient,item))&&
+        !findIngredientSubstitute(recipe,ingredient)
+      );
+
+      for(const name of missing){
+        addRecipeIngredientToShopping(name);
+      }
+
+      activeView='shopping';
+      save();
+      render();
+    })
+  );
+
+  document.querySelectorAll('[data-save-plan-recipe]').forEach(button=>
+    button.addEventListener('click',()=>{
+      const recipe=recipes.find(item=>item.name===button.dataset.savePlanRecipe);
+      const details=button.closest('.plan-from-recipe');
+      const dayKey=details?.querySelector('[data-plan-day-choice]')?.value;
+      const feedback=details?.querySelector('[data-plan-feedback]');
+      if(!recipe||!dayKey||!feedback)return;
+      const dayPlan=weeklyPlan[dayKey]||{};
+      if(dayPlan[recipe.meal]&&dayPlan[recipe.meal]!==recipe.name){
+        feedback.textContent='Ese día ya tiene una receta para esta comida. Elige otro día.';
+        return;
+      }
+      if(dayPlan[recipe.meal]===recipe.name){
+        feedback.textContent='Esa receta ya está en el plan para ese día.';
+        return;
+      }
+      if(!weeklyPlan[dayKey])weeklyPlan[dayKey]={};
+      weeklyPlan[dayKey][recipe.meal]=recipe.name;
+      completedDays=completedDays.filter(day=>day!==dayKey);
+      activeView='plan';
+      save();
+      render();
+    })
+  );
+
+  document.querySelectorAll('[data-start-cooking]').forEach(button=>
+    button.addEventListener('click',()=>{
+      const name=button.dataset.startCooking;
+      cookingStep=cookingRecipe===name?0:0;
+      cookingRecipe=name;
+      renderResult();
+    })
+  );
+
+  document.querySelectorAll('[data-pair-drink]').forEach(button=>
+    button.addEventListener('click',()=>{
+      const section=button.closest('[data-drink-pairing]');
+      const drinkName=section?.querySelector('select')?.value;
+      if(!drinkName)return;
+      pairedDrinks[button.dataset.pairDrink]=drinkName;
+      renderResult();
+    })
+  );
+
+  document.querySelectorAll('[data-remove-paired-drink]').forEach(button=>
+    button.addEventListener('click',()=>{
+      delete pairedDrinks[button.dataset.removePairedDrink];
+      if(cookingRecipe&&recipes.find(recipe=>recipe.name===cookingRecipe)?.category==='drink'){
+        cookingRecipe='';
+        cookingStep=0;
+      }
+      renderResult();
+    })
+  );
+
+  document.querySelector('[data-close-cooking]')?.addEventListener('click',()=>{
+    cookingRecipe='';
+    cookingStep=0;
+    renderResult();
+  });
+
+  document.querySelector('[data-cooking-prev]')?.addEventListener('click',()=>{
+    cookingStep=Math.max(0,cookingStep-1);
+    renderResult();
+  });
+
+  document.querySelector('[data-cooking-next]')?.addEventListener('click',()=>{
+    const recipe=recipes.find(item=>item.name===cookingRecipe);
+    if(!recipe)return;
+    const steps=preparationSteps(recipe);
+    if(cookingStep>=steps.length-1){
+      cookingRecipe='';
+      cookingStep=0;
+    }else{
+      cookingStep++;
+    }
+    renderResult();
+  });
+}
+
+function renderFavorites(){
+  const box=document.querySelector('#favorite-list');
+  const saved=favorites.map(name=>recipes.find(recipe=>recipe.name===name)).filter(Boolean);
+
+  if(!saved.length){
+    box.innerHTML='<p class="empty">Todavía no guardaste favoritos. Usa ☆ Guardar favorita en una idea.</p>';
+    return;
+  }
+
+  const compatible=saved.filter(recipe=>recipeAllowed(recipe));
+
+  if(!compatible.length){
+    box.innerHTML='<p class="empty">Tus favoritos no coinciden con las preferencias actuales. Cambia los filtros para verlos.</p>';
+    return;
+  }
+
+  const hiddenNote=compatible.length<saved.length
+    ?'<p class="note">Algunos favoritos están ocultos porque no coinciden con tus preferencias.</p>'
+    :'';
+
+  box.innerHTML=compatible.map(recipe=>
+    `<article class="saved-item"><div>
+      <strong>${escapeHtml(recipe.name)}</strong>
+      <p>${escapeHtml(recipe.desc)}</p>
+      <p>≈ ${recipe.protein} g de proteína · ${recipe.time} min</p>
+      <div class="saved-actions">
+        <button type="button" data-open-favorite="${escapeHtml(recipe.name)}">Ver ideas similares</button>
+        <button type="button" data-remove-favorite="${escapeHtml(recipe.name)}">Quitar</button>
+      </div>
+    </div></article>`
+  ).join('')+hiddenNote;
+
+  box.querySelectorAll('[data-remove-favorite]').forEach(button=>
+    button.addEventListener('click',()=>{
+      favorites=favorites.filter(name=>name!==button.dataset.removeFavorite);
+      save();
+      render();
+    })
+  );
+
+  box.querySelectorAll('[data-open-favorite]').forEach(button=>
+    button.addEventListener('click',()=>{
+      const recipe=saved.find(item=>item.name===button.dataset.openFavorite);
+      if(recipe){
+        selected=recipe.meal;
+        activeView='today';
+        save();
+        render();
+      }
+    })
+  );
+}
+
+function renderShopping(){
+  const list=document.querySelector('#shopping-list');
+
+  if(!shopping.length){
+    list.innerHTML='<li class="empty">Tu lista está vacía. Agrega ingredientes que te falten desde una receta.</li>';
+    return;
+  }
+
+  list.innerHTML=shopping.map((item,index)=>
+    `<li class="shopping-item">
+      <label>
+        <input type="checkbox" data-check-shopping="${index}" ${item.checked?'checked':''}>
+        <span>${escapeHtml(item.name)}</span>
+      </label>
+      <button class="remove-button" type="button" data-remove-shopping="${index}" aria-label="Quitar ${escapeHtml(item.name)}">×</button>
+    </li>`
+  ).join('');
+
+  list.querySelectorAll('[data-check-shopping]').forEach(input=>
+    input.addEventListener('change',()=>{
+      shopping[Number(input.dataset.checkShopping)].checked=input.checked;
+      save();
+    })
+  );
+
+  list.querySelectorAll('[data-remove-shopping]').forEach(button=>
+    button.addEventListener('click',()=>{
+      shopping.splice(Number(button.dataset.removeShopping),1);
+      save();
+      renderShopping();
+    })
+  );
+}
+
+function getCurrentWeekDays(){
+  const today=new Date();
+  const monday=new Date(today.getFullYear(),today.getMonth(),today.getDate());
+  monday.setDate(monday.getDate()-((monday.getDay()+6)%7));
+  return Array.from({length:7},(_,index)=>{
+    const date=new Date(monday);
+    date.setDate(monday.getDate()+index);
+    const key=`${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
+    return {date,key};
+  });
+}
+
+function renderWeeklyPlan(){
+  const days=getCurrentWeekDays();
+  const dateLabel=new Intl.DateTimeFormat('es-UY',{weekday:'long',day:'numeric',month:'short'});
+  const mealLabels={desayuno:'Desayuno',almuerzo:'Almuerzo',merienda:'Merienda',cena:'Cena'};
+  const plannedCount=days.reduce((count,day)=>count+Object.keys(weeklyPlan[day.key]||{}).length,0);
+  document.querySelector('#plan-count').textContent=plannedCount
+    ?`${plannedCount} ${plannedCount===1?'comida planificada':'comidas planificadas'} esta semana.`
+    :'Todavía no planificaste comidas para esta semana.';
+  document.querySelector('#plan-days').innerHTML=days.map(({date,key})=>{
+    const planned=weeklyPlan[key]||{};
+    const dayRecipes=Object.values(planned).map(name=>recipes.find(recipe=>recipe.name===name)).filter(Boolean);
+    const isCompleted=completedDays.includes(key);
+    const missingByName=new Map();
+    for(const recipe of dayRecipes){
+      for(const ingredient of recipe.ingredients){
+        const inPantry=pantry.some(item=>matchesIngredient(recipe,ingredient,item));
+        if(!inPantry&&!findIngredientSubstitute(recipe,ingredient)){
+          missingByName.set(normalizedWords(ingredient),ingredient);
+        }
+      }
+    }
+    const missingIngredients=[...missingByName.values()];
+    const missingSummary=!dayRecipes.length
+      ?'<p class="plan-missing">Todavía no hay comidas planificadas.</p>'
+      :missingIngredients.length
+        ?`<p class="plan-missing">Faltan ${missingIngredients.length} ${missingIngredients.length===1?'ingrediente':'ingredientes'}: ${missingIngredients.map(escapeHtml).join(', ')}.</p>`
+        :'<p class="plan-missing complete">Tienes todo para las comidas de este día.</p>';
+    const selects=Object.entries(mealLabels).map(([meal,label])=>{
+      const options=recipes.filter(recipe=>recipe.meal===meal&&recipe.category!=='drink')
+        .map(recipe=>`<option value="${escapeHtml(recipe.name)}" ${planned[meal]===recipe.name?'selected':''}>${escapeHtml(recipe.name)}</option>`).join('');
+      let moveControl='';
+      if(planned[meal]){
+        const availableTargets=days.filter(day=>day.key!==key);
+        const preferredTarget=availableTargets.find(day=>!weeklyPlan[day.key]?.[meal])||availableTargets[0];
+        const moveOptions=availableTargets.map(({date,key:targetKey})=>
+          `<option value="${targetKey}" ${targetKey===preferredTarget.key?'selected':''}>${escapeHtml(dateLabel.format(date))}${weeklyPlan[targetKey]?.[meal]?' · ocupado':''}</option>`
+        ).join('');
+        moveControl=`<details class="plan-move"><summary>Mover a otro día</summary>
+          <div class="plan-move-controls"><label>Nuevo día
+            <select data-move-target data-source-date="${key}" data-source-meal="${meal}">${moveOptions}</select>
+          </label><button type="button" data-move-plan data-source-date="${key}" data-source-meal="${meal}">Mover</button></div>
+          <small class="plan-move-feedback" data-move-feedback="${key}-${meal}" aria-live="polite"></small>
+        </details>`;
+      }
+      return `<div class="plan-slot-wrap"><label class="plan-slot">${label}
+        <select data-plan-date="${key}" data-plan-meal="${meal}" aria-label="${label} para ${escapeHtml(dateLabel.format(date))}">
+          <option value="">Sin planificar</option>${options}
+        </select>
+      </label>${moveControl}</div>`;
+    }).join('');
+    const dayClass=isCompleted?'plan-day completed':'plan-day';
+    const doneControl=dayRecipes.length
+      ?`<button type="button" class="plan-done-button" data-complete-day="${key}" aria-pressed="${isCompleted}">${isCompleted?'✓ Día terminado':'Marcar día como terminado'}</button>`
+      :'<p class="plan-empty">Agrega alguna comida para marcar el día como terminado.</p>';
+    return `<article class="${dayClass}"><h2>${escapeHtml(dateLabel.format(date))}</h2>${doneControl}${missingSummary}<div class="plan-slots">${selects}</div></article>`;
+  }).join('');
+
+  document.querySelectorAll('[data-plan-date]').forEach(select=>
+    select.addEventListener('change',()=>{
+      const {planDate,planMeal}=select.dataset;
+      completedDays=completedDays.filter(day=>day!==planDate);
+      if(!weeklyPlan[planDate])weeklyPlan[planDate]={};
+      if(select.value)weeklyPlan[planDate][planMeal]=select.value;
+      else delete weeklyPlan[planDate][planMeal];
+      if(!Object.keys(weeklyPlan[planDate]).length)delete weeklyPlan[planDate];
+      save();
+      renderWeeklyPlan();
+    })
+  );
+
+  document.querySelectorAll('[data-move-plan]').forEach(button=>
+    button.addEventListener('click',()=>{
+      const {sourceDate,sourceMeal}=button.dataset;
+      const controls=button.closest('.plan-move');
+      const targetDate=controls?.querySelector('[data-move-target]')?.value;
+      const feedback=controls?.querySelector('[data-move-feedback]');
+      const recipeName=weeklyPlan[sourceDate]?.[sourceMeal];
+      if(!recipeName||!targetDate||!feedback)return;
+      if(weeklyPlan[targetDate]?.[sourceMeal]){
+        feedback.textContent='Ese día ya tiene una comida planificada en este horario.';
+        return;
+      }
+      if(!weeklyPlan[targetDate])weeklyPlan[targetDate]={};
+      weeklyPlan[targetDate][sourceMeal]=recipeName;
+      delete weeklyPlan[sourceDate][sourceMeal];
+      completedDays=completedDays.filter(day=>day!==sourceDate&&day!==targetDate);
+      if(!Object.keys(weeklyPlan[sourceDate]).length)delete weeklyPlan[sourceDate];
+      save();
+      renderWeeklyPlan();
+    })
+  );
+
+  document.querySelectorAll('[data-complete-day]').forEach(button=>
+    button.addEventListener('click',()=>{
+      const dayKey=button.dataset.completeDay;
+      completedDays=completedDays.includes(dayKey)
+        ?completedDays.filter(day=>day!==dayKey)
+        :[...completedDays,dayKey];
+      save();
+      renderWeeklyPlan();
+    })
+  );
+}
+
+function addWeeklyPlanToShopping(){
+  const plannedRecipes=getCurrentWeekDays().flatMap(day=>
+    Object.values(weeklyPlan[day.key]||{}).map(name=>recipes.find(recipe=>recipe.name===name)).filter(Boolean)
+  );
+  if(!plannedRecipes.length){
+    document.querySelector('#plan-count').textContent='Primero elige algunas recetas para tu semana.';
+    return;
+  }
+
+  let changed=false;
+  for(const recipe of plannedRecipes){
+    for(const ingredient of recipe.ingredients){
+      const alreadyHave=pantry.some(item=>matchesIngredient(recipe,ingredient,item));
+      if(!alreadyHave&&!findIngredientSubstitute(recipe,ingredient)){
+        const before=JSON.stringify(shopping);
+        addRecipeIngredientToShopping(ingredient);
+        if(JSON.stringify(shopping)!==before)changed=true;
+      }
+    }
+  }
+  activeView='shopping';
+  save();
+  render();
+  document.querySelector('#plan-count').textContent=changed
+    ?'Actualicé Compras con los ingredientes que faltan para el plan.'
+    :'Ya tienes los ingredientes necesarios o estaban en tu lista.';
+}
+
+function renderView(){
+  document.querySelectorAll('[data-view-content]').forEach(section=>{
+    section.hidden=section.dataset.viewContent!==activeView;
+  });
+
+  document.querySelectorAll('[data-view]').forEach(button=>{
+    const active=button.dataset.view===activeView;
+    button.classList.toggle('active',active);
+    button.setAttribute('aria-current',active?'page':'false');
+  });
+}
+
+function render(){
+  renderMeals();
+  renderDietaryControls();
+  renderChips();
+  renderResult();
+  renderFavorites();
+  renderShopping();
+  renderWeeklyPlan();
+  renderView();
+}
+
+document.querySelectorAll('[data-diet], [data-allergen]').forEach(input=>
+  input.addEventListener('change',()=>{
+    if(input.dataset.diet==='vegetarian'){
+      dietaryPreferences.vegetarian=input.checked;
+    }else{
+      const allergen=input.dataset.allergen;
+      const current=dietaryPreferences.allergens||[];
+      dietaryPreferences.allergens=input.checked
+        ?[...new Set([...current,allergen])]
+        :current.filter(item=>item!==allergen);
+    }
+    save();
+    render();
+  })
+);
+
+document.querySelector('#recipe-search').addEventListener('input',()=>{
+  renderResult();
+});
+
+const timeFilter=document.querySelector('#time-filter');
+timeFilter.value=String(maxCookTime);
+timeFilter.addEventListener('change',()=>{
+  maxCookTime=Number(timeFilter.value)||0;
+  save();
+  renderResult();
+});
+
+document.querySelector('#ingredient-form').addEventListener('submit',event=>{
+  event.preventDefault();
+  const input=document.querySelector('#ingredient-input');
+  const items=input.value.split(',').map(item=>item.trim()).filter(Boolean);
+  let added=0;
+
+  for(const item of items){
+    if(!pantry.some(existing=>normalized(existing)===normalized(item))){
+      pantry.push(item);
+      added++;
+    }
+  }
+
+  input.value='';
+  save();
+  render();
+  document.querySelector('#toast').textContent=added
+    ?`${added===1?'Ingrediente agregado':'Ingredientes agregados'}.`
+    :'Ese ingrediente ya está en tu lista.';
+  setTimeout(()=>document.querySelector('#toast').textContent='',2200);
+});
+
+document.querySelectorAll('[data-view]').forEach(button=>
+  button.addEventListener('click',()=>{
+    activeView=button.dataset.view;
+    renderView();
+  })
+);
+
+document.querySelector('#plan-shopping').addEventListener('click',addWeeklyPlanToShopping);
+
+document.querySelector('#shopping-form').addEventListener('submit',event=>{
+  event.preventDefault();
+  const input=document.querySelector('#shopping-input');
+  const names=input.value.split(',').map(item=>item.trim()).filter(Boolean);
+
+  for(const name of names){
+    const alreadyListed=shopping.some(item=>
+      normalized(item.ingredient||item.name)===normalized(name)
+    );
+    if(!alreadyListed)shopping.push({name,checked:false});
+  }
+
+  input.value='';
+  save();
+  renderShopping();
+});
+
+const servingsSelect=document.querySelector('#servings-select');
+servingsSelect.value=String(servings);
+servingsSelect.addEventListener('change',()=>{
+  servings=Number(servingsSelect.value);
+  save();
+  render();
+});
+
+const now=new Date();
+document.querySelector('#today').textContent=
+  new Intl.DateTimeFormat('es-UY',{weekday:'long',day:'numeric',month:'long'}).format(now);
+
+render();
+</script>
+</body>
+</html>
